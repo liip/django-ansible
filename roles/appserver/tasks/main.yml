@@ -10,10 +10,13 @@
     version=master
     accept_hostkey=True
   notify: reload uwsgi
+  tags: deploy
 
 - name: Create virtualenv and install dependencies
   pip: requirements={{ project_dir}}/requirements/base.txt virtualenv={{ root_dir }}/venv
+  tags: deploy
 
+# uwsgi configuratrion
 - name: Create uwsgi config file
   template: src=default.ini dest=/etc/uwsgi/apps-available/default
   become: yes
@@ -26,11 +29,9 @@
   become_user: root
   notify: restart uwsgi
 
+# Django configuration
 - name: Generate django config
   template: src=prod.py dest={{ project_dir }}/{{ project_name }}/settings/prod.py
-
-- name: Generate config directory
-  file: path={{ root_dir }}/config state=directory
 
 - name: Check SECRET_KEY file stat
   stat: path={{ project_dir }}/envdir/SECRET_KEY
