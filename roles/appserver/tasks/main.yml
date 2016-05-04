@@ -13,18 +13,18 @@
   tags: deploy
 
 - name: Create virtualenv and install dependencies
-  pip: requirements={{ project_dir}}/requirements/base.txt virtualenv={{ root_dir }}/venv
-  tags: deploy
+  pip: requirements={{ project_dir}}/requirements/base.txt virtualenv={{ root_dir }}/venv virtualenv_python=python3
+  tags: deploy, bla
 
 # uwsgi configuratrion
 - name: Create uwsgi config file
-  template: src=default.ini dest=/etc/uwsgi/apps-available/default
+  template: src=default.ini dest=/etc/uwsgi/apps-available/default.ini
   become: yes
   become_user: root
   notify: restart uwsgi
 
 - name: Symlink uwsgi config file
-  file: src=/etc/uwsgi/apps-available/default dest=/etc/uwsgi/apps-enabled/default state=link
+  file: src=/etc/uwsgi/apps-available/default.ini dest=/etc/uwsgi/apps-enabled/default.ini state=link
   become: yes
   become_user: root
   notify: restart uwsgi
