@@ -1,0 +1,30 @@
+server {
+	listen 80 default;
+	server_name _;
+	rewrite  ^/(.*)$  http://{{ domain }}/$1  permanent;
+}
+
+server {
+	listen 80;
+	server_name {{ domain }};
+
+	# security headers
+	add_header X-Frame-Options SAMEORIGIN;
+	add_header X-XSS-Protection "1; mode=block";
+
+	# do not (browser) cache anything
+	expires 0;
+
+	location /static {
+        alias /home/{{ user }}/static;
+	}
+
+    location /media {
+        alias /home/{{ user }}/media;
+	}
+
+	location / {
+		uwsgi_pass	{{ appserver_host }}:{{ appserver_port }};
+		include		uwsgi_params;
+	}
+}

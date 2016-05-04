@@ -1,2 +1,7 @@
 domain: djangotest.local
+
 database_server: 127.0.0.1
+appserver_host: 127.0.0.1
+appserver_port: 9090
+
+user: ubuntu
