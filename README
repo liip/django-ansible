@@ -1,0 +1,21 @@
+# Repo setup
+* Generate Django project using the liip/django-template
+* Create a directory `config` in the root of the project
+* Copy roles/, group_vars/, site.yml and hosts file to this directory
+* Update site.yml and hosts file with your settings
+* Create a git repo and push it to GitLab
+
+# Server setup
+* Install base server with Ubuntu 16.04
+* Check if python is installed, when not install it with sudo apt-get install python-minimal
+* Generate ssh keys with `ssh-keygen` and no passphrase
+* Copy ssh public key to the project repos GitLab deployment key
+
+# Deploy
+Make sure you have ansible installed
+
+Run this command to setup all configured servers in your config directory:
+`ansible-playbook -s site.yml -i hosts`
+
+To deploy the newest changes, run this command:
+`ansible-playbook -s site.yml -i hosts --tags deploy`

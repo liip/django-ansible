@@ -1,2 +1,14 @@
-- name: Install uwsgi
-  apt: pkg=uwsgi-plugin-python3 state=installed update_cache=true
+- name: Install uwsgi and python
+  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip state=installed update_cache=true
+  become: yes
+  become_user: root
+
+- name: Update git repo
+  git:
+    repo={{ git_repo }}
+    dest={{ project_dir }}
+    version=master
+    accept_hostkey=True
+
+- name: Create virtualenv and install dependencies
+  pip: requirements={{ project_dir}}/requirements/base.txt virtualenv={{ root_dir }}/venv

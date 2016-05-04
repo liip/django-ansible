@@ -1,6 +1,9 @@
----
 - name: restart nginx
   service: name=nginx state=restarted enabled=yes
+  become: yes
+  become_user: root
 
 - name: reload nginx
   service: name=nginx state=reload
+  become: yes
+  become_user: root

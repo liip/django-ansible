@@ -1,3 +1,6 @@
+git_repo: git@gitlab.liip.ch:fabio.anderegg/djangotest.git
+project_name: djangotest
+
 domain: djangotest.local
 
 database_server: 127.0.0.1
@@ -5,3 +8,5 @@ appserver_host: 127.0.0.1
 appserver_port: 9090
 
 user: ubuntu
+root_dir: "/home/{{ user }}"
+project_dir: "{{ root_dir }}/{{ project_name }}"

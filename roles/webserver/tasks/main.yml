@@ -1,11 +1,16 @@
 - name: Install nginx
   apt: pkg=nginx state=installed update_cache=true
+  become: yes
+  become_user: root
 
-- name: Creates directories
-  file:
-    path=/home/{{ user }}/static state=directory
-    path=/home/{{ user }}/media state=directory
+- name: Creates media directory
+  file: path={{ root_dir }}/media state=directory
+
+- name: Creates static directory
+  file: path={{ root_dir }}/static state=directory
 
 - name: Copy nginx configuration file
   template: src=default.j2 dest=/etc/nginx/sites-available/default
+  become: yes
+  become_user: root
   notify: restart nginx
