@@ -30,9 +30,6 @@
   notify: restart uwsgi
 
 # Django configuration
-- name: Generate django config
-  template: src=prod.py dest={{ project_dir }}/{{ project_name }}/settings/prod.py
-
 - name: Check SECRET_KEY file stat
   stat: path={{ project_dir }}/envdir/SECRET_KEY
   register: secret_key_file
@@ -41,5 +38,22 @@
   shell: cat /dev/urandom | tr -dc "abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*(-_=+)" | head -c 100 > {{ project_dir }}/envdir/SECRET_KEY
   when: not secret_key_file.stat.exists
 
-- name: Generate DJANGO_SETTINGS_MODULE file in envdir
-  template: src=DJANGO_SETTINGS_MODULE dest={{ project_dir }}/envdir/DJANGO_SETTINGS_MODULE
+- name: Generate envdir entries
+  copy: dest={{ project_dir }}/envdir/{{ item.setting }} content={{ item.value }}
+  with_items:
+    - {setting: "DATABASE_URL", value: "sqlite:///{{ root_dir }}/database.sqlite3"}
+    - {setting: "MEDIA_ROOT", value: "{{ root_dir }}/media"}
+    - {setting: "STATIC_ROOT", value: "{{ root_dir }}/static"}
+    - {setting: "MEDIA_URL", value: "http://{{ domain }}/media/"}
+    - {setting: "STATIC_URL", value: "http://{{ domain }}/static/"}
+    - {setting: "ALLOWED_HOSTS", value: "{{ domain }}"}
+    - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
+  tags: deploy
+
+- name: Collect static files
+  django_manage: command="collectstatic --noinput" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
+  tags: deploy
+
+- name: Migrate database
+  django_manage: command="migrate --noinput" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
+  tags: deploy
