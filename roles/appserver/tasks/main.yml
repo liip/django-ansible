@@ -1,5 +1,5 @@
-- name: Install uwsgi and python
-  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip state=installed update_cache=true
+- name: Install uwsgi and python and other dependencies
+  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev state=installed update_cache=true
   become: yes
   become_user: root
 
@@ -9,6 +9,19 @@
     dest={{ project_dir }}
     version=master
     accept_hostkey=True
+  notify: reload uwsgi
 
 - name: Create virtualenv and install dependencies
   pip: requirements={{ project_dir}}/requirements/base.txt virtualenv={{ root_dir }}/venv
+
+- name: Create uwsgi config file
+  template: src=default.ini dest=/etc/uwsgi/apps-available/default
+  become: yes
+  become_user: root
+  notify: restart uwsgi
+
+- name: Symlink uwsgi config file
+  file: src=/etc/uwsgi/apps-available/default dest=/etc/uwsgi/apps-enabled/default state=link
+  become: yes
+  become_user: root
+  notify: restart uwsgi
