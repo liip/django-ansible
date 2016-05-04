@@ -1,8 +1,2 @@
-[webserver]
-127.0.0.1 ansible_user=ubuntu ansible_port=2222
-
-[database]
-127.0.0.1 ansible_user=ubuntu ansible_port=2222
-
-[appserver]
+[vagrant]
 127.0.0.1 ansible_user=ubuntu ansible_port=2222

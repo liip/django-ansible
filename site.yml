@@ -1,0 +1,7 @@
+- name: setup vagrant test box
+  hosts: vagrant
+  roles:
+    - common
+    - webserver
+    - appserver
+    - database
