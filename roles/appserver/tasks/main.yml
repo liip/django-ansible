@@ -39,3 +39,6 @@
 - name: Generate SECRET_KEY file if it does not exist yet
   shell: cat /dev/urandom | tr -dc "abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*(-_=+)" | head -c 100 > {{ project_dir }}/envdir/SECRET_KEY
   when: not secret_key_file.stat.exists
+
+- name: Generate DJANGO_SETTINGS_MODULE file in envdir
+  template: src=DJANGO_SETTINGS_MODULE dest={{ project_dir }}/envdir/DJANGO_SETTINGS_MODULE
