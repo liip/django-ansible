@@ -7,3 +7,4 @@
   service: name=uwsgi state=reloaded
   become: yes
   become_user: root
+  tags: deploy

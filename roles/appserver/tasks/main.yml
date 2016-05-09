@@ -1,5 +1,5 @@
 - name: Install uwsgi and python and other dependencies
-  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev state=installed update_cache=true
+  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm state=installed update_cache=true
   become: yes
   become_user: root
 
@@ -50,6 +50,10 @@
     - {setting: "ALLOWED_HOSTS", value: "{{ domain }}"}
     - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
   notify: restart uwsgi
+  tags: deploy
+
+- name: Install NPM dependencies
+  command: npm install chdir={{ project_dir }}
   tags: deploy
 
 - name: Collect static files
