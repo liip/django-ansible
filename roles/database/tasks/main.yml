@@ -1,4 +1,14 @@
 - name: Install PostgreSQL
-  apt: pkg=postgresql-9.5 state=installed update_cache=true
+  apt: pkg=postgresql-9.5,python-psycopg2 state=installed update_cache=true
   become: yes
   become_user: root
+
+- name: Create Database
+  postgresql_db: name={{ project_name }}
+  become: yes
+  become_user: postgres
+
+- name: Create Database User and set Permissions
+  postgresql_user: name={{ project_name }} db={{ project_name }} password={{ lookup('password', 'auth/database.password') }}
+  become: yes
+  become_user: postgres
