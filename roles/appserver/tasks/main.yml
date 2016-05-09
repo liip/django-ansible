@@ -1,5 +1,5 @@
 - name: Install uwsgi and python and other dependencies
-  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm,gettext state=installed update_cache=true
+  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm,gettext,libjpeg-dev state=installed update_cache=true
   become: yes
   become_user: root
 
