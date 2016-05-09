@@ -11,3 +11,5 @@ appserver_port: 9090
 user: ubuntu
 root_dir: "/home/{{ user }}"
 project_dir: "{{ root_dir }}/{{ project_name }}"
+
+translations: yes

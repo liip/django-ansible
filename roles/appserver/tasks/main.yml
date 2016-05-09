@@ -1,5 +1,5 @@
 - name: Install uwsgi and python and other dependencies
-  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm state=installed update_cache=true
+  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm,gettext state=installed update_cache=true
   become: yes
   become_user: root
 
@@ -64,4 +64,11 @@
 # Database
 - name: Migrate database
   django_manage: command="migrate --noinput" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
+  tags: deploy
+
+
+# Translations
+- name: Compile translation files
+  django_manage: command="compilemessages" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
+  when: translations
   tags: deploy
