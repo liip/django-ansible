@@ -53,7 +53,7 @@
 
 # Static files
 - name: Install NPM dependencies
-  command: npm install chdir={{ project_dir }}
+  npm: path={{ project_dir }}
   tags: deploy
 
 - name: Collect static files
