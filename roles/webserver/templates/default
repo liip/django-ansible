@@ -1,11 +1,11 @@
 server {
-	listen 80 default;
+	listen {{ webserver_port }} default;
 	server_name _;
 	rewrite  ^/(.*)$  http://{{ domain }}/$1  permanent;
 }
 
 server {
-	listen 80;
+	listen {{ webserver_port }};
 	server_name {{ domain }};
 
 	# security headers

@@ -2,6 +2,7 @@ git_repo: git@gitlab.liip.ch:fabio.anderegg/djangotest.git
 project_name: djangotest
 
 domain: djangotest.local
+webserver_port: 8080
 
 database_server: 127.0.0.1
 appserver_host: 127.0.0.1
