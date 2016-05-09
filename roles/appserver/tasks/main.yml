@@ -50,7 +50,6 @@
     - {setting: "ALLOWED_HOSTS", value: "{{ domain }}"}
     - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
   notify: restart uwsgi
-  tags: deploy
 
 # Static files
 - name: Install NPM dependencies
