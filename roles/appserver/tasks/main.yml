@@ -1,5 +1,5 @@
 - name: Install uwsgi and python and other dependencies
-  apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm,gettext,libjpeg-dev state=installed update_cache=true
+  apt: pkg=uwsgi,uwsgi-plugin-python3,python3-dev,virtualenv,python-pip,libpq-dev,nodejs,npm,gettext,libjpeg-dev state=installed update_cache=true
 
 - name: Update git repo
   git:
