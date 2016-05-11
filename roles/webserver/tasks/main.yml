@@ -1,5 +1,5 @@
 - name: Install nginx
-  apt: pkg=nginx state=installed update_cache=true
+  apt: pkg=nginx,python-passlib state=installed update_cache=true
 
 - name: Creates media directory
   file: path={{ root_dir }}/media state=directory
@@ -10,3 +10,7 @@
 - name: Copy nginx configuration file
   template: src=default dest=/etc/nginx/sites-available/default
   notify: restart nginx
+
+- name: Create basic auth user file
+  htpasswd: path=/etc/nginx/htpasswd name={{ basic_auth_user }} password={{ basic_auth_password }} owner=root group=www-data mode=0640
+  when: basic_auth
