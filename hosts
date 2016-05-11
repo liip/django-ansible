@@ -1,2 +1,2 @@
 [vagrant]
-127.0.0.1 ansible_user=ubuntu ansible_port=2222
+127.0.0.1 ansible_user=ubuntu ansible_port=2222 ansible_become_user=root ansible_become=true

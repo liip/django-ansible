@@ -1,4 +1,2 @@
 - name: Install basic packages
   apt: pkg=fail2ban,ufw state=installed update_cache=true
-  become: yes
-  become_user: root

@@ -1,7 +1,5 @@
 - name: Install nginx
   apt: pkg=nginx state=installed update_cache=true
-  become: yes
-  become_user: root
 
 - name: Creates media directory
   file: path={{ root_dir }}/media state=directory
@@ -11,6 +9,4 @@
 
 - name: Copy nginx configuration file
   template: src=default dest=/etc/nginx/sites-available/default
-  become: yes
-  become_user: root
   notify: restart nginx

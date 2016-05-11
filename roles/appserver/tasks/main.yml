@@ -1,7 +1,5 @@
 - name: Install uwsgi and python and other dependencies
   apt: pkg=uwsgi,uwsgi-plugin-python3,virtualenv,python-pip,libpq-dev,nodejs,npm,gettext,libjpeg-dev state=installed update_cache=true
-  become: yes
-  become_user: root
 
 - name: Update git repo
   git:
@@ -19,14 +17,9 @@
 # uwsgi configuratrion
 - name: Create uwsgi config file
   template: src=default.ini dest=/etc/uwsgi/apps-available/default.ini
-  become: yes
-  become_user: root
-  notify: restart uwsgi
 
 - name: Symlink uwsgi config file
   file: src=/etc/uwsgi/apps-available/default.ini dest=/etc/uwsgi/apps-enabled/default.ini state=link
-  become: yes
-  become_user: root
   notify: restart uwsgi
 
 # Django configuration
@@ -64,7 +57,6 @@
 - name: Migrate database
   django_manage: command="migrate --noinput" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
   tags: deploy
-
 
 # Translations
 - name: Compile translation files

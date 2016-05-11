@@ -16,11 +16,11 @@ server {
 	expires 0;
 
 	location /static {
-        alias /home/{{ user }}/static;
+        alias {{ root_dir  }}/static;
 	}
 
     location /media {
-        alias /home/{{ user }}/media;
+        alias {{ root_dir  }}/media;
 	}
 
 	location / {

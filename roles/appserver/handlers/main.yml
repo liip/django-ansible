@@ -1,10 +1,6 @@
 - name: restart uwsgi
   service: name=uwsgi state=restarted enabled=yes
-  become: yes
-  become_user: root
 
 - name: reload uwsgi
   service: name=uwsgi state=reloaded
   become: yes
-  become_user: root
-  tags: deploy
