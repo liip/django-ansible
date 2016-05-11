@@ -5,7 +5,7 @@
   git:
     repo={{ git_repo }}
     dest={{ project_dir }}
-    version=master
+    version={{ git_branch }}
     accept_hostkey=True
   notify: reload uwsgi
   tags: deploy

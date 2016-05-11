@@ -1,4 +1,5 @@
 git_repo: git@gitlab.liip.ch:fabio.anderegg/djangotest.git
+git_branch: master
 project_name: djangotest
 
 domain: djangotest.local
