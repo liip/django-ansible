@@ -2,6 +2,6 @@
   hosts: vagrant
   roles:
     - common
+    - database
     - webserver
     - appserver
-    - database
