@@ -30,14 +30,8 @@
   notify: restart uwsgi
 
 # Django configuration
-- name: Check SECRET_KEY file stat
-  stat: path={{ project_dir }}/envdir/SECRET_KEY
-  register: secret_key_file
-
 - name: Generate SECRET_KEY file if it does not exist yet
-  shell: cat /dev/urandom | tr -dc "abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*(-_=+)" | head -c 100 > {{ project_dir }}/envdir/SECRET_KEY
-  when: not secret_key_file.stat.exists
-  notify: restart uwsgi
+  shell: cat /dev/urandom | tr -dc "abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*(-_=+)" | head -c 100 > {{ project_dir }}/envdir/SECRET_KEY creates={{ project_dir }}/envdir/SECRET_KEY
 
 - name: Generate envdir entries
   copy: dest={{ project_dir }}/envdir/{{ item.setting }} content={{ item.value }}
