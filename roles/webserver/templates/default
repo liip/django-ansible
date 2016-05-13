@@ -17,6 +17,9 @@ server {
 
 	location /static {
         alias {{ root_dir  }}/static;
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public";
 	}
 
     location /media {
