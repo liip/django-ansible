@@ -6,6 +6,7 @@ server {
 
 server {
     listen {{ webserver_port }};
+    server_name www.{{ domain }};
 
 {% include 'nginx-site-base' %}
 

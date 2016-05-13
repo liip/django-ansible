@@ -1,5 +1,3 @@
-    server_name {{ domain }};
-
     # security headers
     add_header X-Frame-Options SAMEORIGIN;
     add_header X-XSS-Protection "1; mode=block";

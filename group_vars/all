@@ -1,6 +1,7 @@
 git_repo: git@gitlab.liip.ch:fabio.anderegg/djangotest.git
 git_branch: master
 project_name: djangotest
+letsencrypt_email: fabio.anderegg@liip.ch
 
 domain: djangotest.local
 webserver_port: 8080
@@ -18,3 +19,5 @@ translations: yes
 basic_auth: yes
 basic_auth_user: test
 basic_auth_password: keZQfDRC5pR8xCFw
+
+ssl: no

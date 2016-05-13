@@ -7,9 +7,14 @@
 - name: Creates static directory
   file: path={{ root_dir }}/static state=directory
 
-- name: Copy nginx configuration file
+- name: Copy nginx configuration file (non-ssl)
   template: src=nginx-site-default dest=/etc/nginx/sites-available/default
   when: not ssl
+  notify: restart nginx
+
+- name: Copy nginx configuration file (ssl)
+  template: src=nginx-site-default-ssl dest=/etc/nginx/sites-available/default
+  when: ssl
   notify: restart nginx
 
 - name: Create basic auth user file
@@ -17,11 +22,26 @@
   when: basic_auth
 
 # SSL
-#- name: Install Let's Encrypt
-#  when: ssl
+- name: Install Let's Encrypt
+  apt: pkg=letsencrypt update_cache=true
+  when: ssl
 
-#- name: Install renew cronjob
-#  when: ssl
+- name: Create Let's Encrypt directory
+  file: path=/tmp/letsencrypt state=directory
+  when: ssl
 
-#- name: Generate dhparam file
-#  command: openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
+- name: Generate initial certificate
+  command: letsencrypt certonly --webroot --webroot-path /tmp/letsencrypt -d {{ domain }} -d www.{{ domain }} -m {{ letsencrypt_email }} --agree-tos creates=/etc/letsencrypt
+  when: ssl
+
+- name: Generate dhparam file
+  command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 creates=/etc/ssl/certs/dhparam.pem
+  when: ssl
+
+- name: Create renew cronjob script
+  template: src=update-certs.sh dest=/srv/mtmp/update-certs.sh
+  when: ssl
+
+- name: Install renew cronjob
+  cron: name="update letsencrypt certificates" minute="0" hour="0" weekday="1" job="/srv/{{ project_name }}/update-certs.sh > /dev/null"
+  when: ssl
