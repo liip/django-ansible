@@ -64,7 +64,9 @@ server {
 # http://bla, https://bla => Close connection
 server {
     listen 80;
-    listen    443 ssl;
+    listen [::]:80;
+    listen 443 ssl;
+    listen [::]:443 ssl;
     ssl_certificate        /etc/ssl/certs/ssl-cert-snakeoil.pem;
     ssl_certificate_key    /etc/ssl/private/ssl-cert-snakeoil.key;
     server_name _;
@@ -74,7 +76,8 @@ server {
 
 # http://{{ domain }}, http://www.{domain }} => Redirect to https://www.{{ domain }}
 server {
-    listen        80;
-    server_name    {{ domain }} www.{{ domain }};
-    return        301 https://www.{{ domain }}$request_uri;
+    listen 80;
+    listen [::]:80;
+    server_name {{ domain }} www.{{ domain }};
+    return 301 https://www.{{ domain }}$request_uri;
 }
