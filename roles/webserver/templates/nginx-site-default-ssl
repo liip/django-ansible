@@ -21,7 +21,7 @@ server {
     add_header Strict-Transport-Security max-age=15768000;
 
 
-	location /.well-known/acme-challenge {
+    location /.well-known/acme-challenge {
         default_type "text/plain";
         root /tmp/letsencrypt;
     }
@@ -52,7 +52,7 @@ server {
     # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
     add_header Strict-Transport-Security max-age=15768000;
 
-	location /.well-known/acme-challenge {
+    location /.well-known/acme-challenge {
         default_type "text/plain";
         root /tmp/letsencrypt;
     }
@@ -64,17 +64,17 @@ server {
 # http://bla, https://bla => Close connection
 server {
     listen 80;
-	listen	443 ssl;
-	ssl_certificate		/etc/ssl/certs/ssl-cert-snakeoil.pem;
-	ssl_certificate_key	/etc/ssl/private/ssl-cert-snakeoil.key;
-	server_name _;
-	return      444;
+    listen    443 ssl;
+    ssl_certificate        /etc/ssl/certs/ssl-cert-snakeoil.pem;
+    ssl_certificate_key    /etc/ssl/private/ssl-cert-snakeoil.key;
+    server_name _;
+    return      444;
 }
 
 
 # http://{{ domain }}, http://www.{domain }} => Redirect to https://www.{{ domain }}
 server {
-	listen		80;
-	server_name	{{ domain }} www.{{ domain }};
-	return		301 https://www.{{ domain }}$request_uri;
+    listen        80;
+    server_name    {{ domain }} www.{{ domain }};
+    return        301 https://www.{{ domain }}$request_uri;
 }
