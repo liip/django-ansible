@@ -57,7 +57,7 @@ server {
         root /tmp/letsencrypt;
     }
 
-    return  301 https://www.{{ domain }};
+    return  301 https://www.{{ domain }}$request_uri;
 }
 
 
@@ -76,5 +76,5 @@ server {
 server {
 	listen		80;
 	server_name	{{ domain }} www.{{ domain }};
-	return		301 https://www.{{ domain }};
+	return		301 https://www.{{ domain }}$request_uri;
 }
