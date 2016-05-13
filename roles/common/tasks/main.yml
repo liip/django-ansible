@@ -1,2 +1,6 @@
 - name: Install basic packages
   apt: pkg=fail2ban,ufw state=installed update_cache=true
+
+- name: SSH - Disallow password authentication
+  action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+  notify: restart sshd
