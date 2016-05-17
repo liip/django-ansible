@@ -21,6 +21,13 @@
   htpasswd: path=/etc/nginx/htpasswd name={{ basic_auth_user }} password={{ basic_auth_password }} owner=root group=www-data mode=0640
   when: basic_auth
 
+- name: Create Firewall rule for port 80
+  ufw: rule=allow port=80 proto=tcp
+
+- name: Create Firewall rule for port 443
+  ufw: rule=allow port=443 proto=tcp
+  when: ssl
+
 # SSL
 - name: Install Let's Encrypt
   apt: pkg=letsencrypt update_cache=true
