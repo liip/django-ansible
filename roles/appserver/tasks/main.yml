@@ -47,7 +47,7 @@
     - {setting: "ALLOWED_HOSTS", value: "www.{{ domain }}"}
     - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
     - {setting: "LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
-    - {settings: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s://www.{{ domain }}"}
+    - {setting: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s{% endif %}://www.{{ domain }}"}
   notify: restart uwsgi
 
 # Static files
