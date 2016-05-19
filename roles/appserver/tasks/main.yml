@@ -55,6 +55,10 @@
   npm: path={{ project_dir }}
   tags: deploy
 
+- name: Generate webpack files
+  command: make webpack-prod chdir={{ project_dir }}
+  tags: deploy
+
 - name: Collect static files
   django_manage: command="collectstatic --noinput" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
   tags: deploy
