@@ -38,7 +38,7 @@
   when: ssl
 
 - name: Generate initial certificate
-  command: letsencrypt certonly --webroot --webroot-path /tmp/letsencrypt -d {{ domain }} -d www.{{ domain }} -m {{ letsencrypt_email }} --agree-tos creates=/etc/letsencrypt
+  command: letsencrypt certonly --webroot --webroot-path /tmp/letsencrypt -d {{ domain }} -d {{ full_domain }} -m {{ letsencrypt_email }} --agree-tos creates=/etc/letsencrypt
   when: ssl
 
 - name: Generate dhparam file

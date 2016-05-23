@@ -1,12 +1,12 @@
 server {
     listen {{ webserver_port }} default;
     server_name _;
-    rewrite  ^/(.*)$  http://www.{{ domain }}/$1  permanent;
+    rewrite  ^/(.*)$  http://{{ full_domain }}/$1  permanent;
 }
 
 server {
     listen {{ webserver_port }};
-    server_name www.{{ domain }};
+    server_name {{ full_domain }};
 
 {% include 'nginx-site-base' %}
 

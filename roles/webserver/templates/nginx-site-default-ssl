@@ -1,11 +1,11 @@
-# https://www.{{ domain }} => Deliver site
+# https://{{ full_domain }} => Deliver site
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
-    server_name www.{{ domain }};
+    server_name {{ full_domain }};
 
-    ssl_certificate /etc/letsencrypt/live/www.{{ domain }}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/www.{{ domain }}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/{{ full_domain }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ full_domain }}/privkey.pem;
     ssl_session_timeout 1d;
     ssl_session_cache shared:SSL:50m;
 
@@ -28,8 +28,8 @@ server {
 {% include 'nginx-site-base' %}
 }
 
-
-# https://{{ domain }} => Redirect to https://www.{{ domain }}
+{% if use_www %}
+# https://{{ domain }} => Redirect to https://{{ full_domain }}
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
@@ -57,14 +57,14 @@ server {
 
     return  301 https://www.{{ domain }}$request_uri;
 }
+{% endif %}
 
-
-# http://{{ domain }}, http://www.{domain }} => Redirect to https://www.{{ domain }}
+# http://{{ domain }}{% if use_www %}, http://www.{domain }}{% endif %} => Redirect to https://{{ full_domain }}
 server {
     listen 80;
     listen [::]:80;
-    server_name {{ domain }} www.{{ domain }};
-    return 301 https://www.{{ domain }}$request_uri;
+    server_name {{ domain }} {% if use_www %}www.{{ domain }};{% endif %};
+    return 301 https://{{ full_domain }}$request_uri;
 }
 
 
