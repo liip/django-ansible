@@ -16,7 +16,6 @@
   template: src=nginx-site-default-ssl dest=/etc/nginx/sites-available/default
   when: ssl
   notify: restart nginx
-  tags: bla
 
 - name: Create basic auth user file
   htpasswd: path=/etc/nginx/htpasswd name={{ basic_auth_user }} password={{ basic_auth_password }} owner=root group=www-data mode=0640
