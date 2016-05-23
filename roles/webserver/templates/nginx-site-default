@@ -1,7 +1,7 @@
 server {
     listen {{ webserver_port }} default;
     server_name _;
-    rewrite  ^/(.*)$  http://{{ full_domain }}/$1  permanent;
+    rewrite  ^/(.*)$  http://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/$1  permanent;
 }
 
 server {
