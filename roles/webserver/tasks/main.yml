@@ -52,9 +52,9 @@
   when: ssl
 
 - name: Create renew cronjob script
-  template: src=update-certs.sh dest={{ root_dir }}/scripts/update-certs.sh
+  template: src=update-certs.sh dest={{ root_dir }}/scripts/update-certs.sh mode=a+x
   when: ssl
 
 - name: Install renew cronjob
-  cron: name="update letsencrypt certificates" minute="0" hour="0" weekday="1" job="/srv/{{ project_name }}/update-certs.sh > /dev/null"
+  cron: name="update letsencrypt certificates" minute="0" hour="0" weekday="1" job="/srv/{{ project_name }}/scripts/update-certs.sh"
   when: ssl
