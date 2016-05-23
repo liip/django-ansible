@@ -16,9 +16,9 @@ project_dir: "{{ root_dir }}/{{ project_name }}"
 
 translations: yes
 
-basic_auth: yes
-basic_auth_user: test
-basic_auth_password: keZQfDRC5pR8xCFw
+basic_auth: no
+# basic_auth_user: test
+# basic_auth_password: keZQfDRC5pR8xCFw
 
 webpack: no
 
