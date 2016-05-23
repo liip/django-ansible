@@ -38,11 +38,13 @@
   when: ssl
 
 - name: Generate initial certificate
-  command: letsencrypt certonly --webroot --webroot-path /tmp/letsencrypt -d {{ domain }} -d {{ full_domain }} -m {{ letsencrypt_email }} --agree-tos creates=/etc/letsencrypt
+  command: bash -c "systemctl stop nginx; letsencrypt certonly --standalone -d {{ domain }} {% if use_www %}-d www.{{ domain }}{% endif %} -m {{ letsencrypt_email }} --agree-tos; systemctl start nginx" creates=/etc/letsencrypt
+  notify: restart nginx
   when: ssl
 
 - name: Generate dhparam file
   command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 creates=/etc/ssl/certs/dhparam.pem
+  notify: restart nginx
   when: ssl
 
 - name: Create renew cronjob script
