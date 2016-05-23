@@ -22,7 +22,7 @@
   when: basic_auth
 
 - name: Create Firewall rule for port 80
-  ufw: rule=allow port=80 proto=tcp
+  ufw: rule=allow port={{ webserver_port }} proto=tcp
 
 - name: Create Firewall rule for port 443
   ufw: rule=allow port=443 proto=tcp
