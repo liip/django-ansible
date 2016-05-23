@@ -8,4 +8,7 @@ Copy the printed public key to deployment keys of your project
 Ctrl+D
 Ctrl+D
     ssh-add .vagrant/machines/default/virtualbox/private_key
+    ssh root@127.0.0.1 -p 2222
+    sudo apt-get install python -y
+Ctrl+D
     ansible-playbook site.yml -i hosts
