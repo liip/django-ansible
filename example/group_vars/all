@@ -20,4 +20,7 @@ basic_auth: yes
 basic_auth_user: test
 basic_auth_password: keZQfDRC5pR8xCFw
 
+webpack: no
+
 ssl: no
+admins: '[]'

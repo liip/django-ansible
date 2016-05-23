@@ -58,6 +58,7 @@
 
 - name: Generate webpack files
   command: make webpack-prod chdir={{ project_dir }}
+  when: webpack
   tags: deploy
 
 - name: Collect static files
