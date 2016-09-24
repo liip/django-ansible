@@ -1,5 +1,5 @@
-- name: setup vagrant test box
-  hosts: vagrant
+- name: setup the server
+  hosts: server
   roles:
     - common
     - database

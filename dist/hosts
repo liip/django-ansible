@@ -1,0 +1,2 @@
+[server]
+TODO.example.com ansible_user=root

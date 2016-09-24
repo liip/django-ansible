@@ -1,13 +1,13 @@
-git_repo: git@gitlab.liip.ch:fabio.anderegg/djangotest.git
+git_repo: TODO
 git_branch: master
-project_name: djangotest
-letsencrypt_email: fabio.anderegg@liip.ch
+project_name: TODO
+letsencrypt_email: TODO
 
-domain: djangotest.local
-use_www: yes
+domain: TODO
+use_www: no
 full_domain: "{% if use_www %}www.{% endif %}{{ domain }}"
 
-webserver_port: 8080
+webserver_port: 80
 
 database_host: 127.0.0.1
 appserver_host: 127.0.0.1
