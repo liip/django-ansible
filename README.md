@@ -15,3 +15,6 @@ Go to the deployment directory, there are two scripts:
 
 ```setup.sh```: Installs all software and setups the app
 ```deploy.sh```: Updates the code only
+
+# License
+MIT
