@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 mkdir deployment
-git submodule add https://github.com/liip/django-ansible.git deployment/django-ansible
+
+if [ $1 = "local" ]; then
+    ln -s ../`dirname $0` deployment/django-ansible
+else
+    git submodule add https://github.com/liip/django-ansible.git deployment/django-ansible
+fi
 
 mkdir deployment/group_vars
 cp deployment/django-ansible/dist/group_vars/all deployment/group_vars/all
