@@ -10,7 +10,7 @@ cp deployment/django-ansible/dist/site.yml deployment/site.yml
 
 virtualenv -p python2 deployment/venv/
 deployment/venv/bin/pip install ansible~=2.1.1.0
-echo -e "\ndeployment/\nvenv/" >> .gitignore
+echo -e "\ndeployment/venv/" >> .gitignore
 
 ln -s django-ansible/scripts/setup.sh deployment/setup.sh
 ln -s django-ansible/scripts/deploy.sh deployment/deploy.sh
