@@ -5,6 +5,9 @@
     # do not (browser) cache anything
     expires 0;
 
+    # limit upload size to 20MB
+    client_max_body_size 20M;
+
     location /static {
         alias {{ root_dir  }}/static;
         expires max;
