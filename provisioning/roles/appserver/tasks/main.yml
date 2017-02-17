@@ -26,10 +26,10 @@
   file: name={{ root_dir }}/logs state=directory owner={{ appserver_user }} group={{ appserver_user }}
 
 - name: Create uwsgi config file
-  template: src=default.ini dest=/etc/uwsgi/apps-available/default.ini
+  template: src=default.ini dest=/etc/uwsgi/apps-available/{{ project_name }}.ini
 
 - name: Symlink uwsgi config file
-  file: src=/etc/uwsgi/apps-available/default.ini dest=/etc/uwsgi/apps-enabled/default.ini state=link
+  file: src=/etc/uwsgi/apps-available/{{ project_name }}.ini dest=/etc/uwsgi/apps-enabled/{{ project_name }}.ini state=link
   notify: restart uwsgi
 
 # Django configuration
