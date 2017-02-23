@@ -8,17 +8,19 @@
   file: path={{ root_dir }}/static state=directory
 
 - name: Copy nginx configuration file (non-ssl)
-  template: src=nginx-site-default dest=/etc/nginx/sites-available/default
+  template: src=nginx-site-default dest=/etc/nginx/sites-available/{{ project_name }}
   when: not ssl
-  notify: restart nginx
 
 - name: Copy nginx configuration file (ssl)
-  template: src=nginx-site-default-ssl dest=/etc/nginx/sites-available/default
+  template: src=nginx-site-default-ssl dest=/etc/nginx/sites-available/{{ project_name }}
   when: ssl
+
+- name: Symlink nginx configuration file
+  file: src=/etc/nginx/sites-available/{{ project_name }} dest=/etc/nginx/sites-enabled/{{ project_name }} state=link
   notify: restart nginx
 
 - name: Create basic auth user file
-  htpasswd: path=/etc/nginx/htpasswd name={{ basic_auth_user }} password={{ basic_auth_password }} owner=root group=www-data mode=0640
+  htpasswd: path=/etc/nginx/{{ project_name }}.htpasswd name={{ basic_auth_user }} password={{ basic_auth_password }} owner=root group=www-data mode=0640
   when: basic_auth
 
 - name: Create Firewall rule for port 80

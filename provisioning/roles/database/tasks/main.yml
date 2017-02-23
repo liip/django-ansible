@@ -1,5 +1,5 @@
 - name: Install PostgreSQL
-  apt: pkg=postgresql-9.5,python-psycopg2 state=installed update_cache=true
+  apt: pkg=postgresql,python-psycopg2 state=installed update_cache=true
 
 - name: Create Database
   postgresql_db: name={{ project_name }}
