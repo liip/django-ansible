@@ -8,8 +8,8 @@ The following services/software will be installed on the server:
 # Server setup
 * Setup a server with Ubuntu 16.04 or Debian 8
 * Create a user with passwordless sudo privileges
-* Generate a passwordless ssh key with `ssh-keygen`
-* Add the SSH public key to your git repository, e.g. as deploy key on GitLab/GitHub
+* As the root user (`sudo su`), generate a passwordless ssh key with `ssh-keygen`
+* Add the *root* SSH public key to your git repository, e.g. as deploy key on GitLab/GitHub
 * Check if python is installed, if not install it with `sudo apt-get install python-minimal -y`
   or `sudo yum install python`
 
