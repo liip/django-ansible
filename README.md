@@ -1,4 +1,4 @@
-This project allows you to easily deploy your Django project on a Debian/Ubuntu/CentOS/RHEL Linux server.
+This project allows you to easily deploy your Django project on a Debian/Ubuntu Linux server.
 The following services/software will be installed on the server:
 * nginx
 * uwsgi
@@ -6,7 +6,7 @@ The following services/software will be installed on the server:
 * (optional) Let's Encrypt/certbot
 
 # Server setup
-* Setup a server with Ubuntu 16.04, Debian 8 or CentOS/RHEL 7
+* Setup a server with Ubuntu 16.04 or Debian 8
 * Create a user with passwordless sudo privileges
 * Generate a passwordless ssh key with `ssh-keygen`
 * Add the SSH public key to your git repository, e.g. as deploy key on GitLab/GitHub
