@@ -5,12 +5,8 @@
   postgresql_db: name={{ project_name }}
   become: yes
   become_user: postgres
-  vars:
-    ansible_ssh_pipelining: true
 
 - name: Create Database User and set Permissions
   postgresql_user: name={{ project_name }} db={{ project_name }} password={{ lookup('password', 'auth/database.password') }}
   become: yes
   become_user: postgres
-  vars:
-    ansible_ssh_pipelining: true
