@@ -8,7 +8,6 @@
     version={{ git_branch }}
     accept_hostkey=True
     recursive=False
-  notify: reload uwsgi
   tags: deploy
 
 - name: Create virtualenv and install dependencies
@@ -49,7 +48,6 @@
     - {setting: "LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
     - {setting: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}"}
     - {setting: "ADMINS", value: "{{ admins }}"}
-  notify: restart uwsgi
 
 # Static files
 - name: Install NPM dependencies
@@ -77,4 +75,8 @@
 - name: Compile translation files
   django_manage: command="compilemessages" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
   when: translations
+  tags: deploy
+
+- name: Reload uwsgi
+  service: name=uwsgi state=reloaded
   tags: deploy

@@ -3,5 +3,5 @@
   roles:
     - common
     - database
-    - webserver
     - appserver
+    - webserver

@@ -9,10 +9,12 @@
 
 - name: Copy nginx configuration file (non-ssl)
   template: src=nginx-site-default dest=/etc/nginx/sites-available/{{ project_name }}
+  notify: restart nginx
   when: not ssl
 
 - name: Copy nginx configuration file (ssl)
   template: src=nginx-site-default-ssl dest=/etc/nginx/sites-available/{{ project_name }}
+  notify: restart nginx
   when: ssl
 
 - name: Symlink nginx configuration file
@@ -60,3 +62,7 @@
 - name: Install renew cronjob
   cron: name="update letsencrypt certificates" minute="0" hour="0" weekday="1" job="/srv/{{ project_name }}/scripts/update-certs.sh"
   when: ssl
+
+- name: Reload nginx
+  service: name=nginx state=reloaded
+  tags: deploy
