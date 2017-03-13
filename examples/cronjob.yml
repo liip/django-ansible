@@ -1,0 +1,8 @@
+- name: Cron
+  cron:
+    name="Link checker"
+    minute="0"
+    hour="12"
+    job="{{ root_dir }}/venv/bin/python {{ project_dir }}/manage.py linkchecker"
+    user="{{ appserver_user }}"
+  tags: custom

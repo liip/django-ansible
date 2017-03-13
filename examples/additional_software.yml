@@ -1,0 +1,2 @@
+- name: Install additional software
+  apt: pkg=wkhtmltopdf

@@ -28,9 +28,21 @@ curl -sS https://raw.githubusercontent.com/liip/django-ansible/master/install.sh
 # Deploy
 Go to the deployment directory, there are two scripts:
 
-* ```setup.sh```: Installs all software and setups the app, you have to run this the first time and always when you
+* ```setup.sh```: Installs all software and setups the app, you have to run this the first time and any time you
 update one of the config files inside `deployment/`
-* ```deploy.sh```: Updates the code only and reload the app server (uwsgi)
+* ```deploy.sh```: Deploys the code only and reloads the app server (uwsgi)
+
+# Customization
+You can add additional installation steps by adding Ansible Tasks to your project.
+To do this, create a directory `custom` in the `deployment` directory. This is the root directory
+for your custom Ansible role, you can add tasks, handlers, templates and other Ansible artifacts here.
+You also have to add your custom role to your `deployment/site.yml` file.
+
+To e.g. add a cronjob to your project, create a `tasks` directory inside `custom`, copy the file
+from `examples/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.yml` and adjust the configuration.
+
+* [Cronjob](examples/cronjob.yml)
+* [Additional Software](examples/additional_software.yml)
 
 # License
 MIT
