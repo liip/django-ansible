@@ -35,7 +35,6 @@
   with_items:
     - {path: "/tmp/wkhtmltox"}
     - {path: "/tmp/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz"}
-  tags: custom
 
 - name: Generate envdir entry
   copy: dest={{ project_dir }}/envdir/WKHTMLTOPDF content={{root_dir}}/bin/wkhtmltopdf
