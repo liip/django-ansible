@@ -43,6 +43,7 @@ from `examples/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.y
 
 * [Cronjob](examples/cronjob.yml)
 * [Additional Software](examples/additional_software.yml)
+* [wkhtmltopdf](examples/wkhtmltopdf.yml)
 
 # License
 MIT
