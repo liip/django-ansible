@@ -1,2 +1,2 @@
-[server]
+[production]
 <ip address/hostname> ansible_user=<user>

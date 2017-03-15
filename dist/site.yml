@@ -1,5 +1,5 @@
 - name: setup the server
-  hosts: server
+  hosts: production
   roles:
     - common
     - database

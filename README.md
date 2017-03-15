@@ -32,6 +32,12 @@ Go to the deployment directory, there are two scripts:
 update one of the config files inside `deployment/`
 * ```deploy.sh```: Deploys the code only and reloads the app server (uwsgi)
 
+# Multiple environments/systems
+To deploy to multiple different environments (e.g. test/staging/prod) you have to do the following:
+Make a copy of the files `deployment/group_vars/production` and `deployment/production` and adjust
+them for your new environment. Add the name of you new environment to the `hosts:` entry in
+`deployment/site.yml`.
+
 # Customization
 You can add additional installation steps by adding Ansible Tasks to your project.
 To do this, create a directory `custom` in the `deployment` directory. This is the root directory

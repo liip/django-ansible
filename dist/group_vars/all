@@ -1,40 +1,7 @@
 git_repo: TODO
-git_branch: master
 project_name: TODO
-admins: '[]'
-
-domain: TODO
-use_www: no
-full_domain: "{% if use_www %}www.{% endif %}{{ domain }}"
-
-webserver_port: 80
-
-database_host: 127.0.0.1
-appserver_host: 127.0.0.1
-appserver_port: 9090
-appserver_user: "{{ project_name }}"
-
-root_dir: "/srv/{{ project_name }}"
-
-# if the django project root (where the manage.py file is) is not at the git root, change this variable
-project_dir: "{{ root_dir }}/{{ project_name }}"
 
 # activate this if use django translations. This will run the compilemessages management command
 translations: no
 
-basic_auth: no
-# basic_auth_user: test
-# basic_auth_password: keZQfDRC5pR8xCFw
-
 webpack: no
-
-# enable ssl support on nginx. You also have to uncomment one of the following sections
-ssl: no
-
-# if you have an ssl certificate and key, set the following variables:
-# ssl_certificate: /srv/{{ project_name }}/ssl/cert.pem
-# ssl_private_key: /srv/{{ project_name }}/ssl/key.pem
-
-# if you want to use lets encrypt, set the following variables
-# letsencrypt: yes
-# letsencrypt_email: TODO
