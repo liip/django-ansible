@@ -29,7 +29,6 @@
 
 - name: Symlink uwsgi config file
   file: src=/etc/uwsgi/apps-available/{{ project_name }}.ini dest=/etc/uwsgi/apps-enabled/{{ project_name }}.ini state=link
-  notify: restart uwsgi
 
 # Django configuration
 - name: Generate SECRET_KEY file if it does not exist yet
@@ -74,6 +73,6 @@
   when: translations
   tags: deploy
 
-- name: Reload uwsgi
-  service: name=uwsgi state=reloaded
+- name: Restart uwsgi
+  service: name=uwsgi state=restarted
   tags: deploy
