@@ -5,3 +5,11 @@ server {
 {% include 'nginx-site-base' %}
 
 }
+
+{% if use_www %}
+server {
+    listen {{ webserver_port }};
+    server_name {{ domain }};
+    rewrite  ^/(.*)$  http://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/$1 permanent;
+}
+{% endif %}
