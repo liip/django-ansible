@@ -54,9 +54,6 @@
   npm: path={{ project_dir }} production=no
   tags: deploy
 
-- name: Copy bowerrc to allow running bower as root
-  template: src=bowerrc dest=/root/.bowerrc
-
 - name: Generate webpack files
   command: make webpack-prod chdir={{ project_dir }}
   when: webpack
