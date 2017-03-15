@@ -3,7 +3,7 @@ The following services/software will be installed on the server:
 * nginx
 * uwsgi
 * PostgreSQL
-* (optional) Let's Encrypt/certbot
+* (optional) SSL with Lets Encrypt/certbot or your own certificate
 
 # Server setup
 * Setup a server with Ubuntu 16.04 or Debian 8

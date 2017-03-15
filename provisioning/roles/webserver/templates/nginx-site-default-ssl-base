@@ -1,8 +1,14 @@
     listen 443 ssl;
     listen [::]:443 ssl;
 
+{% if letsencrypt %}
     ssl_certificate /etc/letsencrypt/live/{{ domain }}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/{{ domain }}/privkey.pem;
+{% else %}
+    ssl_certificate {{ ssl_certificate }};
+    ssl_certificate_key {{ ssl_private_key }};
+{% endif %}
+
     ssl_session_timeout 1d;
     ssl_session_cache shared:SSL:50m;
 

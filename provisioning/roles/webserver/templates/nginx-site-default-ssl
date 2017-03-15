@@ -24,16 +24,3 @@ server {
     server_name {{ domain }} {% if use_www %}www.{{ domain }}{% endif %};
     return 301 https://{{ full_domain }}$request_uri;
 }
-
-
-# http://bla, https://bla => Close connection
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    listen 443 ssl default_server;
-    listen [::]:443 ssl default_server;
-    ssl_certificate        /etc/ssl/certs/ssl-cert-snakeoil.pem;
-    ssl_certificate_key    /etc/ssl/private/ssl-cert-snakeoil.key;
-    server_name _;
-    return      444;
-}

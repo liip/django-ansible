@@ -35,11 +35,11 @@
 # SSL
 - name: Install Let's Encrypt
   apt: pkg=letsencrypt update_cache=true
-  when: ssl
+  when: letsencrypt
 
 - name: Create Let's Encrypt directory
   file: path=/tmp/letsencrypt state=directory
-  when: ssl
+  when: letsencrypt
 
 - name: Generate dhparam file
   command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 creates=/etc/ssl/certs/dhparam.pem
@@ -49,19 +49,19 @@
 - name: Generate initial certificate
   command: bash -c "systemctl stop nginx; letsencrypt certonly --standalone -d {{ domain }} {% if use_www %}-d www.{{ domain }}{% endif %} -m {{ letsencrypt_email }} --agree-tos; systemctl start nginx" creates=/etc/letsencrypt
   notify: restart nginx
-  when: ssl
+  when: letsencrypt
 
 - name: Create scripts directory
   file: path={{ root_dir }}/scripts state=directory
-  when: ssl
+  when: letsencrypt
 
 - name: Create renew cronjob script
   template: src=update-certs.sh dest={{ root_dir }}/scripts/update-certs.sh mode=a+x
-  when: ssl
+  when: letsencrypt
 
 - name: Install renew cronjob
   cron: name="update letsencrypt certificates" minute="0" hour="0" weekday="1" job="/srv/{{ project_name }}/scripts/update-certs.sh"
-  when: ssl
+  when: letsencrypt
 
 - name: Reload nginx
   service: name=nginx state=reloaded
