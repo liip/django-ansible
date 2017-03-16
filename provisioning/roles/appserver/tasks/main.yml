@@ -40,8 +40,8 @@
     - {setting: "DATABASE_URL", value: "postgres://{{ project_name }}:{{ lookup('password', 'auth/database.password') }}@{{ database_host }}/{{ project_name }}"}
     - {setting: "MEDIA_ROOT", value: "{{ root_dir }}/media"}
     - {setting: "STATIC_ROOT", value: "{{ root_dir }}/static"}
-    - {setting: "MEDIA_URL", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/media/"}
-    - {setting: "STATIC_URL", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/static/"}
+    - {setting: "MEDIA_URL", value: "http{% if ssl or behind_ssl|default(false) %}s{% endif %}://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/media/"}
+    - {setting: "STATIC_URL", value: "http{% if ssl or behind_ssl|default(false) %}s{% endif %}://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/static/"}
     - {setting: "ALLOWED_HOSTS", value: "{{ full_domain }}"}
     - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
     - {setting: "LOG_FILE", value: "{{ root_dir }}/logs/error.log"}

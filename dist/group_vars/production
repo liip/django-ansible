@@ -29,6 +29,9 @@ ssl: no
 # letsencrypt: yes
 # letsencrypt_email: TODO
 
+# uncomment the following line when your app runs behind an ssl termination proxy
+# behind_ssl: yes
+
 basic_auth: no
 # basic_auth_user: test
 # basic_auth_password: keZQfDRC5pR8xCFw
