@@ -46,6 +46,14 @@ You also have to add your custom role to your `deployment/site.yml` file.
 
 To e.g. add a cronjob to your project, create a `tasks` directory inside `custom`, copy the file
 from `examples/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.yml` and adjust the configuration.
+In order for the tasks to be executed you need to add `<your-project>/deployment/custom/tasks/main.yml` with the
+following content:
+
+    - include: wkhtmltopdf.yml
+    - include: cronjob.yml
+    - include: <yourtask>.yml
+
+Example files:
 
 * [Cronjob](examples/cronjob.yml)
 * [Additional Software](examples/additional_software.yml)
