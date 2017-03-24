@@ -27,10 +27,11 @@
 
 - name: Create Firewall rule for port 80
   ufw: rule=allow port={{ webserver_port }} proto=tcp
+  when: enable_fw
 
 - name: Create Firewall rule for port 443
   ufw: rule=allow port=443 proto=tcp
-  when: ssl
+  when: ssl and enable_fw
 
 # SSL
 - name: Install Let's Encrypt

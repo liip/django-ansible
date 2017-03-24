@@ -32,6 +32,9 @@ ssl: no
 # uncomment the following line when your app runs behind an ssl termination proxy
 # behind_ssl: yes
 
+# by default don't enable the firewall (iptables)
+enable_fw: no
+
 basic_auth: no
 # basic_auth_user: test
 # basic_auth_password: keZQfDRC5pR8xCFw

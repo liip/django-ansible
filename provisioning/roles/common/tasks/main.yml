@@ -7,6 +7,8 @@
 
 - name: Activate firewall
   ufw: state=enabled policy=deny
+  when: enable_fw
 
 - name: Firewall - Allow SSH
   ufw: rule=allow name=OpenSSH
+  when: enable_fw
