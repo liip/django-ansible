@@ -42,18 +42,16 @@ them for your new environment. Add the name of you new environment to the `hosts
 You can add additional installation steps by adding Ansible Tasks to your project.
 To do this, create a directory `custom` in the `deployment` directory. This is the root directory
 for your custom Ansible role, you can add tasks, handlers, templates and other Ansible artifacts here.
-You also have to add your custom role to your `deployment/site.yml` file.
+You also have to add your custom role to your `deployment/site.yml` under the `roles` entry.
 
 To e.g. add a cronjob to your project, create a `tasks` directory inside `custom`, copy the file
-from `examples/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.yml` and adjust the configuration.
-In order for the tasks to be executed you need to add `<your-project>/deployment/custom/tasks/main.yml` with the
-following content:
+from `examples/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.yml` and adjust the configuration
+in this file for your needs. You also have to add a `<your-project>/deployment/custom/tasks/main.yml` file which
+includes the new task file:
 
-    - include: wkhtmltopdf.yml
     - include: cronjob.yml
-    - include: <yourtask>.yml
 
-Example files:
+Example task files:
 
 * [Cronjob](examples/cronjob.yml)
 * [Additional Software](examples/additional_software.yml)
