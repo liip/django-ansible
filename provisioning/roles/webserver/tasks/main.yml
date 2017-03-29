@@ -1,12 +1,6 @@
 - name: Install nginx
   apt: pkg=nginx,python-passlib state=installed update_cache=true
 
-- name: Creates media directory
-  file: path={{ root_dir }}/media state=directory
-
-- name: Creates static directory
-  file: path={{ root_dir }}/static state=directory
-
 - name: Copy nginx configuration file (non-ssl)
   template: src=nginx-site-default dest=/etc/nginx/sites-available/{{ project_name }}
   notify: restart nginx

@@ -1,0 +1,4 @@
+enable_fw: yes
+
+checkout_dir: "{{ root_dir }}/{{ project_name }}"
+project_dir: "{{ checkout_dir }}"
