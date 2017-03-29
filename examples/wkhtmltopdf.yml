@@ -1,3 +1,6 @@
+- name: install required libraries for wkhtmltopdf
+  apt: pkg=libxrender1,libxext6
+
 - name: wkhtmltopdf file exist check
   stat:
     path: "{{root_dir}}/bin/wkhtmltopdf"
