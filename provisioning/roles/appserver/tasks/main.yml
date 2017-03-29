@@ -4,7 +4,7 @@
 - name: Update git repo
   git:
     repo={{ git_repo }}
-    dest={{ project_dir }}
+    dest={{ checkout_dir }}
     version={{ git_branch }}
     accept_hostkey=True
     recursive=False
