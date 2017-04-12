@@ -1,0 +1,14 @@
+[Unit]
+Description=python-rq worker service
+After=network.target
+
+[Service]
+Type=simple
+User={{ appserver_user }}
+Group={{ appserver_user }}
+WorkingDirectory={{ project_dir }}
+ExecStart={{ root_dir }}/venv/bin/python {{ project_dir }}/manage.py rqworker
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

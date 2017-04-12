@@ -4,6 +4,10 @@
 #
 #    pip-compile --output-file requirements/base.txt requirements/base.in
 #
+click==6.7                # via rq
 dj-database-url==0.4.2
-Django==1.10.6
+django-rq==0.9.5
+django==1.10.6
 psycopg2==2.7.1
+redis==2.10.5             # via rq
+rq==0.7.1                 # via django-rq

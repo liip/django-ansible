@@ -1,0 +1,17 @@
+- name: Install redis
+  apt: pkg=redis-server
+
+- name: Copy python-rq systemd unit
+  template: src=python-rq.service dest=/etc/systemd/system/python-rq.service
+  register: daemon_reload
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+  when: daemon_reload|changed
+
+- name: Start python-rq on boot
+  service: name=python-rq enabled=yes
+
+- name: Restart python-rq
+  service: name=python-rq state=restarted
+  tags: deploy

@@ -57,5 +57,14 @@ Example task files:
 * [Additional Software](examples/additional_software.yml)
 * [wkhtmltopdf](examples/wkhtmltopdf.yml)
 
+# python-rq task queue
+There is an additional role "taskqueue" which setups python-rq with redis
+as broker. To use it, add django-rq to your INSTALLED_APPS and define queues
+with RQ_QUEUES in your Django settings file. (see example in
+`tests/django_app/settings/base.py`)
+
+Then activate the role by adding/uncommenting `- taskqueue` in your
+`deployment/site.yml` file.
+
 # License
 MIT

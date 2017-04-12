@@ -15,4 +15,6 @@ sed -i "s/domain\: TODO/domain: $SERVER/" group_vars/production
 sed -i "s/<ip address\/hostname>/$SERVER/" production
 sed -i "s/<user>/manager/" production
 
+sed -i "s/# - taskqueue/- taskqueue/" site.yml
+
 echo 'project_dir: "{{ checkout_dir }}/tests/django_app"' >> group_vars/all
