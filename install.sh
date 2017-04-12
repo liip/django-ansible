@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 mkdir deployment
 
-if [ $1 = "local" ]; then
+if [[ $1 = "local" ]]; then
     ln -s ../`dirname $0` deployment/django-ansible
 else
     git submodule add https://github.com/liip/django-ansible.git deployment/django-ansible
