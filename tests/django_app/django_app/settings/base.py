@@ -140,6 +140,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.staticfiles',
     'django.contrib.messages',
+
+    'django_rq',
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
