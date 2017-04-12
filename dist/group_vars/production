@@ -13,11 +13,6 @@ appserver_host: 127.0.0.1
 appserver_port: 9090
 appserver_user: "{{ project_name }}"
 
-root_dir: "/srv/{{ project_name }}"
-
-# if the django project root (where the manage.py file is) is not at the git root, change this variable
-project_dir: "{{ root_dir }}/{{ project_name }}"
-
 # enable ssl support on nginx. You also have to uncomment one of the following sections
 ssl: no
 

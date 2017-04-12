@@ -1,1 +1,9 @@
 enable_fw: yes
+
+root_dir: "/srv/{{ project_name }}"
+
+# where the git repo will be checked out
+checkout_dir: "{{ root_dir }}/{{ project_name }}"
+
+# root of the django project (directory with manage.py) inside the checked out git repository (absolute path)
+project_dir: "{{ checkout_dir }}"
