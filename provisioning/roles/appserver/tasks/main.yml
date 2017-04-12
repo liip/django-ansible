@@ -22,8 +22,11 @@
   file: path={{ root_dir }}/static state=directory
 
 # uwsgi configuration
+- name: Create group for app server
+  group: name={{ appserver_user}}
+
 - name: Create user for app server
-  user: name={{ appserver_user}}
+  user: name={{ appserver_user}} group={{ appserver_user}}
 
 - name: Make media directory writeable for appserver_user
   file: name={{ root_dir }}/media owner={{ appserver_user }} group={{ appserver_user }}
