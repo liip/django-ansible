@@ -1,5 +1,6 @@
 - name: install required libraries for wkhtmltopdf
   apt: pkg=libxrender1,libxext6
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: wkhtmltopdf file exist check
   stat:

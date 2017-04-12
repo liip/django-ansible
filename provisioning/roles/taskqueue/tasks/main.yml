@@ -1,5 +1,6 @@
 - name: Install redis
   apt: pkg=redis-server
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Copy python-rq systemd unit
   template: src=python-rq.service dest=/etc/systemd/system/python-rq.service

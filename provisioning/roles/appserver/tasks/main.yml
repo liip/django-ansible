@@ -1,5 +1,6 @@
 - name: Install uwsgi and python and other dependencies
   apt: pkg=uwsgi,uwsgi-plugin-python3,python3-dev,virtualenv,python-pip,libpq-dev,nodejs-legacy,npm,gettext,libjpeg-dev,git state=installed update_cache=true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Update git repo
   git:

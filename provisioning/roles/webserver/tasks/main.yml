@@ -1,5 +1,6 @@
 - name: Install nginx
   apt: pkg=nginx,python-passlib state=installed update_cache=true
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Copy nginx configuration file (non-ssl)
   template: src=nginx-site-default dest=/etc/nginx/sites-available/{{ project_name }}
@@ -30,7 +31,7 @@
 # SSL
 - name: Install Let's Encrypt
   apt: pkg=letsencrypt update_cache=true
-  when: letsencrypt
+  when: letsencrypt and (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Create Let's Encrypt directory
   file: path=/tmp/letsencrypt state=directory
