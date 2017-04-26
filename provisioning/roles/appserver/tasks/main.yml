@@ -57,6 +57,8 @@
     - {setting: "LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
     - {setting: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}"}
     - {setting: "ADMINS", value: "{{ admins }}"}
+    - {setting: "EMAIL_URL", value: "{{ email_url }}"}
+    - {setting: "EMAIL_FROM", value: "{{ email_from }}"}
 
 # Static files
 - name: Install NPM dependencies

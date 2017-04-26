@@ -1,0 +1,2 @@
+email_url: smtp://localhost:25
+email_from: webmaster@localhost
