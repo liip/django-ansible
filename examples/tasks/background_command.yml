@@ -1,0 +1,14 @@
+- name: Copy systemd unit
+  template: src=background_command.service dest=/etc/systemd/system/{{ background_command }}.service
+  register: daemon_reload
+
+- name: Reload systemd
+  command: systemctl daemon-reload
+  when: daemon_reload|changed
+
+- name: Start {{ background_command }} on boot
+  service: name=python-rq enabled=yes
+
+- name: Restart {{ background_command }}
+  service: name={{ background_command }} state=restarted
+  tags: deploy
