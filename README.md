@@ -75,7 +75,7 @@ for your custom Ansible role, you can add tasks, handlers, templates and other A
 You also have to add your custom role to your `deployment/site.yml` under the `roles` entry.
 
 To e.g. add a cronjob to your project, create a `tasks` directory inside `custom`, copy the file
-from `examples/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.yml` and adjust the configuration
+from `examples/tasks/cronjob.yml` to `<your-project>/deployment/custom/tasks/cronjob.yml` and adjust the configuration
 in this file for your needs. You also have to add a `<your-project>/deployment/custom/tasks/main.yml` file which
 includes the new task file:
 
@@ -83,9 +83,9 @@ includes the new task file:
 
 Example task files:
 
-* [Cronjob](examples/cronjob.yml)
-* [Additional Software](examples/additional_software.yml)
-* [wkhtmltopdf](examples/wkhtmltopdf.yml)
+* [Cronjob](examples/tasks/cronjob.yml)
+* [Additional Software](examples/tasks/additional_software.yml)
+* [wkhtmltopdf](examples/tasks/wkhtmltopdf.yml)
 
 # python-rq task queue
 There is an additional role "taskqueue" which setups python-rq with redis
