@@ -62,7 +62,7 @@
 
 # Static files
 - name: Install NPM dependencies
-  npm: path={{ project_dir }} production=yes
+  npm: path={{ project_dir }} production=no
   tags: deploy
 
 - name: Generate webpack files
