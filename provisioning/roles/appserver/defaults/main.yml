@@ -1,2 +1,5 @@
 email_url: smtp://localhost:25
 email_from: webmaster@localhost
+
+static_url: http{% if ssl or behind_ssl|default(false) %}s{% endif %}://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/static/
+media_url: http{% if ssl or behind_ssl|default(false) %}s{% endif %}://{{ full_domain }}{% if webserver_port != 80 %}:{{ webserver_port }}{% endif %}/media/
