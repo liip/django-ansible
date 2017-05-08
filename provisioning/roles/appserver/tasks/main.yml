@@ -54,7 +54,8 @@
     - {setting: "STATIC_URL", value: "{{ static_url }}"}
     - {setting: "ALLOWED_HOSTS", value: "{{ full_domain }}"}
     - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
-    - {setting: "LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
+    - {setting: "ERROR_LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
+    - {setting: "INFO_LOG_FILE", value: "{{ root_dir }}/logs/info.log"}
     - {setting: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}"}
     - {setting: "ADMINS", value: "{{ admins }}"}
     - {setting: "EMAIL_URL", value: "{{ email_url }}"}
