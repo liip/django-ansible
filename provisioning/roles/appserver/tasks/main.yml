@@ -53,7 +53,7 @@
     - {setting: "MEDIA_URL", value: "{{ media_url }}"}
     - {setting: "STATIC_URL", value: "{{ static_url }}"}
     - {setting: "ALLOWED_HOSTS", value: "{{ full_domain }}"}
-    - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
+    - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.config.settings.base"}
     - {setting: "LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
     - {setting: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}"}
     - {setting: "ADMINS", value: "{{ admins }}"}
