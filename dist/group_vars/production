@@ -28,7 +28,7 @@ ssl: no
 # behind_ssl: yes
 
 # by default don't enable the firewall (iptables)
-enable_fw: yes
+enable_fw: no
 
 basic_auth: no
 # basic_auth_user: test
