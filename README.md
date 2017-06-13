@@ -21,9 +21,12 @@ curl -sS https://raw.githubusercontent.com/liip/django-ansible/master/install.sh
 ```
 * The script added the directory `deployment/` to your project, you should add that to git
 * Open the following files and update them to your requirements:
-    * `deployment/hosts`: Update the host for your servers hostname/ip address and set the user
-    you have created above
+    * `deployment/production`: Update the host for your servers hostname/ip address and set the user
+    you have created above.
     * `deployment/group_vars/all`: Update all placeholder values
+
+If you want to add another host, create a new file `deployment/<host>` like 
+`deployment/production` and add `<host>` to site.yml.
 
 # Deploy
 Go to the deployment directory, there are two scripts:
