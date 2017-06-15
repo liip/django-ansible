@@ -81,7 +81,7 @@
 
 # Translations
 - name: Compile translation files
-  django_manage: command="compilemessages" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
+  django_manage: command="compilemessages -f" app_path={{ project_dir }} virtualenv={{ root_dir }}/venv/
   when: translations
   tags: deploy
 
