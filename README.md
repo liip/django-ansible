@@ -24,6 +24,7 @@ curl -sS https://raw.githubusercontent.com/liip/django-ansible/master/install.sh
     * `deployment/production`: Update the host for your servers hostname/ip address and set the user
     you have created above.
     * `deployment/group_vars/all`: Update all placeholder values
+    * optional: `deployment/group_vars/production`: override variables from `deployment/group_vars/all` for specific environments
 
 If you want to add another host, create a new file `deployment/<host>` like 
 `deployment/production` and add `<host>` to site.yml.
