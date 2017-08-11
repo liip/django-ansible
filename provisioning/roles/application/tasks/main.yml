@@ -1,0 +1,11 @@
+- name: Install git
+  apt: pkg=git state=installed update_cache=true
+
+- name: Update git repo
+  git:
+    repo={{ git_repo }}
+    dest={{ checkout_dir }}
+    version={{ git_branch }}
+    accept_hostkey=True
+    recursive=False
+  tags: deploy
