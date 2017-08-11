@@ -1,2 +1,3 @@
 letsencrypt: no
 custom_nginx_directives:
+static: no
