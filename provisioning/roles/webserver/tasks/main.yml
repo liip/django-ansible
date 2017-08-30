@@ -5,12 +5,16 @@
 - name: Copy nginx configuration file (non-ssl)
   template: src=nginx-site-default dest=/etc/nginx/sites-available/{{ project_name }}
   notify: restart nginx
-  when: not ssl
+  when: not ssl and not custom_nginx_template | is_file
 
 - name: Copy nginx configuration file (ssl)
   template: src=nginx-site-default-ssl dest=/etc/nginx/sites-available/{{ project_name }}
   notify: restart nginx
-  when: ssl
+  when: ssl and not custom_nginx_template | is_file
+
+- name: Copy custom nginx template
+  template: src={{ custom_nginx_template }} dest=/etc/nginx/sites-available/{{ project_name }}
+  when: custom_nginx_template | is_file
 
 - name: Symlink nginx configuration file
   file: src=/etc/nginx/sites-available/{{ project_name }} dest=/etc/nginx/sites-enabled/{{ project_name }} state=link
