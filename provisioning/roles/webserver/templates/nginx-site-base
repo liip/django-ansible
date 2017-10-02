@@ -19,10 +19,7 @@
         alias {{ root_dir  }}/media;
     }
 
-    location / {
-        uwsgi_pass    {{ appserver_host }}:{{ appserver_port }};
-        include        uwsgi_params;
-    }
+{{ location_block }}
 
 
 {% if basic_auth %}
