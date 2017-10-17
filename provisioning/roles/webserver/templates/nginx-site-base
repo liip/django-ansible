@@ -19,13 +19,16 @@
         alias {{ root_dir  }}/media;
     }
 
-    location / {
-        uwsgi_pass    {{ appserver_host }}:{{ appserver_port }};
-        include        uwsgi_params;
-    }
+{{ location_block }}
 
 
 {% if basic_auth %}
     auth_basic           "closed site";
     auth_basic_user_file /etc/nginx/{{ project_name }}.htpasswd;
 {% endif %}
+
+    gzip on;
+    gzip_proxied any;
+    gzip_types text/plain text/html text/css text/javascript application/x-javascript application/javascript text/xml application/xml application/xml+rss text/javascript application/json;
+    gzip_vary on;
+    gzip_disable “MSIE [1-6]\.(?!.*SV1)”;
