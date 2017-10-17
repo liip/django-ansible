@@ -14,7 +14,7 @@ The following services/software will be installed on the server:
   or `sudo yum install python`
 
 # Project setup
-* Generate Django project using the liip/django-template
+* Generate a Django project using https://github.com/liip-amboss/django-template
 * Run the install script in your project root (same directory as `manage.py`):
 ```
 curl -sS https://raw.githubusercontent.com/liip/django-ansible/master/install.sh | /bin/bash
