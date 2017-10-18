@@ -3,5 +3,3 @@ project_name: TODO
 
 # activate this if use django translations. This will run the compilemessages management command
 translations: no
-
-webpack: no
