@@ -1,0 +1,2 @@
+frontend_path: "{{ root_dir }}/frontend"
+frontend_temp_path: "/tmp/{{ project_name }}-frontend/"

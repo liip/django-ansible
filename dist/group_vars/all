@@ -3,3 +3,17 @@ project_name: TODO
 
 # activate this if use django translations. This will run the compilemessages management command
 translations: no
+
+# Activate the deployment of a webpack based javascript frontend.
+# The referenced git repo needs a package.json with a "npm run build"
+# script in it. The frontend will be served at `frontend_url_path`.
+# You also have to change the django_url_path variable below if you serve
+# the app from the root path /.
+# frontend_git_repo: TODO
+# frontend_url_path: / # where to serve the app
+
+# url paths served by django/uwsgi server
+django_url_paths: /  # serve all non-static paths with django
+# example with js single page app frontend and wagtail:
+# django_url_paths: api|admin|cms|documents
+# You can completely comment out django_url_paths to serve only static files

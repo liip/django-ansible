@@ -5,4 +5,5 @@
     - database
     - appserver
     - webserver
+    # - frontend
     # - taskqueue
