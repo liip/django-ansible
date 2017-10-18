@@ -34,6 +34,12 @@
 - name: Create log file directory
   file: name={{ root_dir }}/logs state=directory owner={{ appserver_user }} group={{ appserver_user }}
 
+- name: Create blank error log file to avoid problem with permissions
+  copy: content="" dest={{ root_dir }}/logs/error.log owner={{ appserver_user }} group={{ appserver_user }}
+
+- name: Create blank info log file to avoid problem with permissions
+  copy: content="" dest={{ root_dir }}/logs/info.log owner={{ appserver_user }} group={{ appserver_user }}
+
 - name: Create uwsgi config file
   template: src=default.ini dest=/etc/uwsgi/apps-available/{{ project_name }}.ini
 
