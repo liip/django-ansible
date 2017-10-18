@@ -1,6 +1,14 @@
-*.pyc
-*.pyo
-/envdir/*
-*.db
-deployment/
+__pycache__
 
+/envdir/*
+!/envdir/.gitkeep
+/.tox
+
+/.cache/
+/.coverage
+
+*.mo
+
+# ignore deployment configuration for the test app,
+# do not do this in your real projects!
+/deployment/

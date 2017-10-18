@@ -1,0 +1,8 @@
+[run]
+source = django_app
+omit =
+    */migrations/*
+    */tests/*
+    */test_*.py
+    */tests.py
+    django_app/config/*

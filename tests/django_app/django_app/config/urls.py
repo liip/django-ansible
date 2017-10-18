@@ -1,18 +1,17 @@
-from django.conf.urls import *  # NOQA
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.contrib import admin
-from django.conf import settings
 import django.views.static
-from django.views.generic.base import TemplateView
+from django.conf import settings
+from django.conf.urls import include, url
+from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='base.html')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', TemplateView.as_view(template_name='home.html')),
 ]
 
-# This is only needed when using runserver.
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
