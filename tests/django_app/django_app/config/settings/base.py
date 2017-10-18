@@ -1,28 +1,29 @@
-from __future__ import absolute_import, unicode_literals
-
 import os
 
 import dj_database_url
+import dj_email_url
 
 from . import get_env_variable
 from .. import get_project_root_path
 
-gettext = lambda s: s
+from django.utils.translation import ugettext_lazy
 
 # Full filesystem path to the project.
 BASE_DIR = get_project_root_path()
 
-WSGI_APPLICATION = 'django_app.wsgi.application'
-
 # Internationalization
 LANGUAGE_CODE = 'en'
-TIME_ZONE = None
+TIME_ZONE = 'Europe/Zurich'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ('en', gettext('en')),
+    ('en', ugettext_lazy('English')),
+)
+
+LOCALE_PATHS = (
+    'locale/',
 )
 
 # A boolean that turns on/off debug mode. When set to ``True``, stack traces
@@ -87,7 +88,7 @@ STATIC_URL = get_env_variable('STATIC_URL', '/static/')
 STATIC_ROOT = get_env_variable('STATIC_ROOT', '/tmp/static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'django_app', 'static'),
 )
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -100,7 +101,8 @@ MEDIA_URL = get_env_variable('MEDIA_URL', '/media/')
 MEDIA_ROOT = get_env_variable('MEDIA_ROOT', '/tmp/static/media')
 
 # Package/module name to import the root urlpatterns from for the project.
-ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
+ROOT_URLCONF = "%s.config.urls" % PROJECT_DIRNAME
+WSGI_APPLICATION = 'django_app.config.wsgi.application'
 
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -134,14 +136,14 @@ TEMPLATES = [{
 ################
 
 INSTALLED_APPS = (
+    'django_app.web.apps.WebConfig',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.staticfiles',
     'django.contrib.messages',
-
-    'django_rq',
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -157,10 +159,101 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-RQ_QUEUES = {
-    'default': {
-        'HOST': 'localhost',
-        'PORT': 6379,
-        'DB': 0,
+
+###########
+# LOGGING #
+###########
+
+###########
+# LOGGING #
+###########
+
+_PROJECT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            '../../../')
+
+ERROR_LOG_FILE = get_env_variable('ERROR_LOG_FILE',
+                                  os.path.join(_PROJECT_DIR, 'error_log'))
+INFO_LOG_FILE = get_env_variable('INFO_LOG_FILE',
+                                 os.path.join(_PROJECT_DIR, 'info_log'))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'filters': {
+        'info_only': {
+            '()': 'energyday17.log_filters.InfoLogFilter'
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue'
+        }
     },
+    'handlers': {
+        'info_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': INFO_LOG_FILE,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'default',
+            'filters': ['info_only']
+        },
+        'error_file': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': ERROR_LOG_FILE,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'default',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+            'filters': ['require_debug_true']
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false']
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['error_file', 'info_file', 'console', 'mail_admins'],
+            'level': 'DEBUG',
+        },
+        'django': {
+            'handlers': ['error_file', 'info_file', 'console', 'mail_admins'],
+            'level': 'DEBUG',
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s %(module)s %(message)s'
+        },
+    }
 }
+
+
+#############
+# E-Mailing #
+#############
+EMAIL_URL = get_env_variable('EMAIL_URL', 'console://')
+email_config = dj_email_url.parse(EMAIL_URL)
+EMAIL_FILE_PATH = email_config['EMAIL_FILE_PATH']
+EMAIL_HOST_USER = email_config['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = email_config['EMAIL_HOST_PASSWORD']
+EMAIL_HOST = email_config['EMAIL_HOST']
+EMAIL_PORT = email_config['EMAIL_PORT']
+EMAIL_BACKEND = email_config['EMAIL_BACKEND']
+EMAIL_USE_TLS = email_config['EMAIL_USE_TLS']
+EMAIL_USE_SSL = email_config['EMAIL_USE_SSL']
+DEFAULT_FROM_EMAIL = get_env_variable('EMAIL_FROM', 'webmaster@localhost')
