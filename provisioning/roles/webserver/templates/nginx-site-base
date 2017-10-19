@@ -8,14 +8,14 @@
     # limit upload size to 20MB
     client_max_body_size 20M;
 
-    location /static {
+    location /{{ project_name }}-static {
         alias {{ root_dir  }}/static;
         expires max;
         add_header Pragma public;
         add_header Cache-Control "public";
     }
 
-    location /media {
+    location /{{ project_name }}-media {
         alias {{ root_dir  }}/media;
     }
 
