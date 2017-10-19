@@ -4,7 +4,8 @@ project_name: TODO
 # activate this if use django translations. This will run the compilemessages management command
 translations: no
 
-# Activate the deployment of a webpack based javascript frontend.
+# Activate the deployment of a webpack based javascript frontend by uncommenting
+# the frontend role in site.yml and setting the following two variables:
 # The referenced git repo needs a package.json with a "npm run build"
 # script in it. The frontend will be served at `frontend_url_path`.
 # You also have to change the django_url_path variable below if you serve
