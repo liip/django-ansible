@@ -88,7 +88,7 @@ Example task files:
 * [Cronjob](examples/tasks/cronjob.yml)
 * [Additional Software](examples/tasks/additional_software.yml)
 * [wkhtmltopdf](examples/tasks/wkhtmltopdf.yml)
-* [Always running ./manage.py command](examples/tasks/wkhtmltopdf.yml)
+* [Running a ./manage.py command in the background](examples/tasks/background_command.yml)
 
 # python-rq task queue
 There is an additional role "taskqueue" which setups python-rq with redis
