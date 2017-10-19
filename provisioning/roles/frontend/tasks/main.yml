@@ -14,12 +14,12 @@
   tags: deploy
 
 - name: check local build dir
-  local_action: stat path="{{ frontend_temp_path }}/dist"
+  local_action: stat path="{{ frontend_temp_path }}/{{ frontend_build_directory }}"
   register: buildexists
   become: no
   tags: deploy
 
 - name: copy files to the server
-  copy: src={{ frontend_temp_path }}/dist/ dest={{ frontend_path }}
+  copy: src={{ frontend_temp_path }}/{{ frontend_build_directory }}/ dest={{ frontend_path }}
   when: buildexists|success
   tags: deploy
