@@ -8,19 +8,37 @@
     # limit upload size to 20MB
     client_max_body_size 20M;
 
-    location /static {
+    location /{{ project_name }}-static {
         alias {{ root_dir  }}/static;
         expires max;
         add_header Pragma public;
         add_header Cache-Control "public";
     }
 
-    location /media {
+    location /{{ project_name }}-media {
         alias {{ root_dir  }}/media;
     }
 
-{{ location_block }}
 
+{% if frontend_url_path is defined %}
+    location {{ frontend_url_path }} {
+       root {{ frontend_path }};
+       try_files $uri $uri/ /index.html;
+    }
+{% endif %}
+
+{% if django_url_paths is defined and django_url_paths %}
+    {% if django_url_paths == '/' %}
+    location / {
+    {% else %}
+    location ~ ^/({{django_url_paths}}) {
+    {% endif %}
+        uwsgi_pass    {{ appserver_host }}:{{ appserver_port }};
+        include        uwsgi_params;
+    }
+{% endif %}
+
+    {{ custom_nginx_directives }}
 
 {% if basic_auth %}
     auth_basic           "closed site";

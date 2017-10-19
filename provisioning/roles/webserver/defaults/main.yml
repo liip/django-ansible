@@ -1,7 +1,2 @@
-location_block: |
-    location / {
-        uwsgi_pass    {{ appserver_host }}:{{ appserver_port }};
-        include        uwsgi_params;
-    }
-
 letsencrypt: no
+custom_nginx_directives:

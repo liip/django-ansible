@@ -1,0 +1,25 @@
+- name: clone frontend git repo to temp directory
+  local_action: git repo={{ frontend_git_repo }} dest={{ frontend_temp_path }} version={{ git_branch }} accept_hostkey=True recursive=False
+  become: no
+  tags: deploy
+
+- name: yarn install (this takes some time)
+  local_action: command yarn install --force chdir={{ frontend_temp_path }}
+  become: no
+  tags: deploy
+
+- name: build application (this takes some time)
+  local_action: command npm run build chdir={{ frontend_temp_path }}
+  become: no
+  tags: deploy
+
+- name: check local build dir
+  local_action: stat path="{{ frontend_temp_path }}/{{ frontend_build_directory }}"
+  register: buildexists
+  become: no
+  tags: deploy
+
+- name: copy files to the server
+  copy: src={{ frontend_temp_path }}/{{ frontend_build_directory }}/ dest={{ frontend_path }}
+  when: buildexists|success
+  tags: deploy

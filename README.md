@@ -42,6 +42,25 @@ Make a copy of the files `deployment/group_vars/production` and `deployment/prod
 them for your new environment. Add the name of you new environment to the `hosts:` entry in
 `deployment/site.yml`.
 
+# Javascript single-page application frontend
+You can deploy a spa with django-ansible by uncommenting the `frontend` role
+in site.yml and setting some variables in `group_vars/all`.
+
+The app has to be in a separate git repository. The repository will be checked out and
+built locally, afther that the resulting files gets pushed to the server.
+The project needs a package.json with a `npm run build` command
+which builds the app into the `dist/` subdirectory of the project.
+
+If the build uses a different directory than `dist/`
+for the production build, set the `frontend_build_directory` variable.
+
+To make HTML5 history mode urls work, all requests not matching a file inside
+`dist/` will be rewritten by nginx to `dist/index.html`.
+
+[vue-cli](https://github.com/vuejs/vue-cli) generates a project fulfilling these 
+requirements without further modifications, except that HTML5 history mode is not
+enabled by default on vue-router.
+
 # Email
 django-ansible uses dj-email-url to configure the email settings. Add this to your
 `settings.py`/`base.py` to make it work:
