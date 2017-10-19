@@ -1,5 +1,5 @@
 - name: clone frontend git repo to temp directory
-  local_action: git repo={{ frontend_git_repo }} dest={{ frontend_temp_path }} version={{ git_branch }} accept_hostkey=True recursive=False
+  local_action: git repo={{ frontend_git_repo }} dest={{ frontend_temp_path }} version={{ frontend_git_branch }} accept_hostkey=True recursive=False
   become: no
   tags: deploy
 
