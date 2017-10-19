@@ -31,7 +31,7 @@
     {% if django_url_paths == '/' %}
     location / {
     {% else %}
-    location ~ ^/({{django_url_paths}})/ {
+    location ~ ^/({{django_url_paths}}) {
     {% endif %}
         uwsgi_pass    {{ appserver_host }}:{{ appserver_port }};
         include        uwsgi_params;
