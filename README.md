@@ -23,11 +23,8 @@ curl -sS https://raw.githubusercontent.com/liip/django-ansible/master/install.sh
 * Open the following files and update them to your requirements:
     * `deployment/production`: Update the host for your servers hostname/ip address and set the user
     you have created above.
-    * `deployment/group_vars/all`: Update all placeholder values
-    * optional: `deployment/group_vars/production`: override variables from `deployment/group_vars/all` for specific environments
-
-If you want to add another host, create a new file `deployment/<host>` like 
-`deployment/production` and add `<host>` to site.yml.
+    * `deployment/group_vars/all`: Update all placeholder values (environment/server independent variables)
+    * `deployment/group_vars/production`: Set variables for a specific environment/server
 
 # Deploy
 Go to the deployment directory, there are two scripts:
@@ -36,7 +33,7 @@ Go to the deployment directory, there are two scripts:
 update one of the config files inside `deployment/`
 * ```deploy.sh```: Deploys the code only and reloads the app server (uwsgi)
 
-# Multiple environments/systems
+# Multiple environments/servers
 To deploy to multiple different environments (e.g. test/staging/prod) you have to do the following:
 Make a copy of the files `deployment/group_vars/production` and `deployment/production` and adjust
 them for your new environment. Add the name of you new environment to the `hosts:` entry in
