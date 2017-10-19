@@ -2,5 +2,4 @@ dj-database-url
 Django
 psycopg2
 dj_email_url
-
-
+django-rq

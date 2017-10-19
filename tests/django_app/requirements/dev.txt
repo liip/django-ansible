@@ -8,13 +8,14 @@
 asn1crypto==0.23.0        # via cryptography
 bcrypt==3.1.4             # via paramiko
 cffi==1.11.2              # via bcrypt, cryptography, pynacl
-click==6.7                # via pip-tools
+click==6.7                # via pip-tools, rq
 cryptography==2.1.1       # via paramiko
 dj-database-url==0.4.2
 dj-email-url==0.0.10
 django-debug-toolbar==1.8
 django-extensions==1.9.6
-Django==1.11.6            # via django-debug-toolbar
+django-rq==0.9.6
+Django==1.11.6            # via django-debug-toolbar, django-rq
 enum34==1.1.6             # via cryptography
 Fabric3==1.13.1.post1
 first==2.0.1              # via pip-tools
@@ -31,6 +32,8 @@ pyasn1==0.3.7             # via paramiko
 pycparser==2.18           # via cffi
 pynacl==1.1.2             # via paramiko
 pytz==2017.2              # via django
+redis==2.10.6             # via rq
+rq==0.8.2                 # via django-rq
 six==1.11.0               # via bcrypt, cryptography, django-extensions, fabric3, pip-tools, pynacl, tox
 sqlparse==0.2.4           # via django-debug-toolbar
 tox==2.9.1
