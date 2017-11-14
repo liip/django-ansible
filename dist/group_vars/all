@@ -2,7 +2,7 @@ git_repo: TODO
 project_name: TODO
 
 # activate this if use django translations. This will run the compilemessages management command
-translations: no
+translations: yes
 
 # Activate the deployment of a webpack based javascript frontend by uncommenting
 # the frontend role in site.yml and setting the following two variables:
