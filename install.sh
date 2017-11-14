@@ -18,7 +18,7 @@ cd deployment
 ./django-ansible/scripts/check_venv.sh
 cd ..
 
-echo -e "\ndeployment/venv/" >> .gitignore
+echo -e "\n/deployment/venv/\n/deployment/auth/\n" >> .gitignore
 
 ln -s django-ansible/scripts/setup.sh deployment/setup.sh
 ln -s django-ansible/scripts/deploy.sh deployment/deploy.sh
