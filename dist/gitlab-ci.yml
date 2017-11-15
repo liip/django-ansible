@@ -1,0 +1,15 @@
+
+#deploy_staging:
+#  cache:
+#    paths:
+#      - deployment/venv/
+#  stage: deploy_staging
+#  tags:
+#    - docker
+#  image: python:2.7
+#  only: [develop]
+#  before_script:
+#    - "git submodule update --init deployment/django-ansible/"
+#  script: "bash deployment/django-ansible/scripts/ci_deploy.sh staging"
+#  environment:
+#    name: staging

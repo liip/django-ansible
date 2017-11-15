@@ -6,3 +6,4 @@ October/November 2017
 * Removed old webpack/npm support
 * Nginx: activate gzip encoding for all important mime types
 * Tons of documentation updates
+* Added continuous deployment configuration and documentation
