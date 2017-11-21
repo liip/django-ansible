@@ -13,6 +13,7 @@ cp deployment/django-ansible/dist/group_vars/production deployment/group_vars/pr
 cp deployment/django-ansible/dist/ansible.cfg deployment/ansible.cfg
 cp deployment/django-ansible/dist/production deployment/production
 cp deployment/django-ansible/dist/site.yml deployment/site.yml
+cat deployment/django-ansible/dist/gitlab-ci.yml >> .gitlab-ci.yml
 
 cd deployment
 ./django-ansible/scripts/check_venv.sh

@@ -46,7 +46,7 @@ You can deploy a spa with django-ansible by uncommenting the `frontend` role
 in site.yml and setting some variables in `group_vars/all`.
 
 The app has to be in a separate git repository. The repository will be checked out and
-built locally, afther that the resulting files gets pushed to the server.
+built locally, after that the resulting files gets pushed to the server.
 The project needs a package.json with a `npm run build` command
 which builds the app into the `dist/` subdirectory of the project.
 
@@ -59,6 +59,10 @@ To make HTML5 history mode urls work, all requests not matching a file inside
 [vue-cli](https://github.com/vuejs/vue-cli) generates a project fulfilling these 
 requirements without further modifications, except that HTML5 history mode is not
 enabled by default on vue-router.
+
+## Continuous Deployment with GitLab
+The `install.sh` script sets up a basic continuous deployment configuration. 
+How to configure GitLab to use this configuration is documented [here](docs/gitlab_continuous_deployment.md).
 
 ## Email
 django-template uses dj-email-url to configure the email settings.
