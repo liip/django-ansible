@@ -38,3 +38,5 @@ basic_auth: no
 # basic_auth_user: test
 # basic_auth_password: keZQfDRC5pR8xCFw
 
+# change this if you have env-specific frontend builds
+# frontend_build_env: production

@@ -42,7 +42,7 @@ them for your new environment. Add the name of you new environment to the `hosts
 `deployment/site.yml`.
 
 ## Javascript single-page application frontend
-You can deploy a spa with django-ansible by uncommenting the `frontend` role
+You can deploy a SPA with django-ansible by uncommenting the `frontend` role
 in site.yml and setting some variables in `group_vars/all`.
 
 The app has to be in a separate git repository. The repository will be checked out and
@@ -56,12 +56,16 @@ for the production build, set the `frontend_build_directory` variable.
 To make HTML5 history mode urls work, all requests not matching a file inside
 `dist/` will be rewritten by nginx to `dist/index.html`.
 
-[vue-cli](https://github.com/vuejs/vue-cli) generates a project fulfilling these 
+[vue-cli](https://github.com/vuejs/vue-cli) generates a project fulfilling these
 requirements without further modifications, except that HTML5 history mode is not
 enabled by default on vue-router.
 
+If you have several environments (e.g. staging and production), configure `frontend_build_env`
+in each appropriate `group_vars/*` file. Refer to this [guide](https://gist.github.com/chlab/2af7475ac92cc4ed4295bc4243f84e6a)
+on how to setup your frontend to work with this.
+
 ## Continuous Deployment with GitLab
-The `install.sh` script sets up a basic continuous deployment configuration. 
+The `install.sh` script sets up a basic continuous deployment configuration.
 How to configure GitLab to use this configuration is documented [here](docs/gitlab_continuous_deployment.md).
 
 ## Email

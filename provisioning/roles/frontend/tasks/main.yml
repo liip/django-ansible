@@ -9,7 +9,7 @@
   tags: deploy
 
 - name: build application (this takes some time)
-  local_action: command npm run build chdir={{ frontend_temp_path }}
+  local_action: command npm run build {{ frontend_build_env }} chdir={{ frontend_temp_path }}
   become: no
   tags: deploy
 
