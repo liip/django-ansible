@@ -1,0 +1,23 @@
+
+    # security headers
+    add_header X-Frame-Options SAMEORIGIN;
+    add_header X-XSS-Protection "1; mode=block";
+
+    # limit upload size to 20MB
+    client_max_body_size 20M;
+
+    root {{ root_dir }};
+    index index.html;
+
+    location / {
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public";
+        try_files $uri $uri/ =404;
+    }
+
+
+{% if basic_auth %}
+    auth_basic           "closed site";
+    auth_basic_user_file /etc/nginx/{{ project_name }}.htpasswd;
+{% endif %}

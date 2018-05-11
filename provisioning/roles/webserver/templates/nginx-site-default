@@ -2,7 +2,11 @@ server {
     listen {{ webserver_port }};
     server_name {{ full_domain }};
 
+{% if static %}
+{% include 'nginx-site-base-static' %}
+{% else %}
 {% include 'nginx-site-base' %}
+{% endif %}
 
 }
 
