@@ -50,6 +50,16 @@
 - name: Generate SECRET_KEY file if it does not exist yet
   shell: cat /dev/urandom | tr -dc "abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*(-_=+)" | head -c 100 > {{ project_dir }}/envdir/SECRET_KEY creates={{ project_dir }}/envdir/SECRET_KEY
 
+- name: Register subdomains for allowed hosts envdir
+  set_fact: subdomain_item="\n{{ item }}.{{ domain }}"
+  with_items: "{{ subdomains }}"
+  register: subdomains_result
+  when: subdomains | length > 0
+
+- name: Gather subdomains for allowed hosts envdir
+  set_fact: subdomain_list="{{ subdomains_result.results | map(attribute='ansible_facts.subdomain_item') | join('') }}"
+  when: subdomains | length > 0
+
 - name: Generate envdir entries
   copy: dest={{ project_dir }}/envdir/{{ item.setting }} content={{ item.value }}
   with_items:
@@ -58,7 +68,7 @@
     - {setting: "STATIC_ROOT", value: "{{ root_dir }}/static"}
     - {setting: "MEDIA_URL", value: "{{ media_url }}"}
     - {setting: "STATIC_URL", value: "{{ static_url }}"}
-    - {setting: "ALLOWED_HOSTS", value: "{{ full_domain }}"}
+    - {setting: "ALLOWED_HOSTS", value: "{{ full_domain }}{% if subdomain_list is defined %}{{subdomain_list}}{% endif %}"}
     - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.config.settings.base"}
     - {setting: "ERROR_LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
     - {setting: "INFO_LOG_FILE", value: "{{ root_dir }}/logs/info.log"}

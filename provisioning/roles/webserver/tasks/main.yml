@@ -46,8 +46,18 @@
   notify: restart nginx
   when: ssl
 
+- name: Register subdomains for Let's Encrypt
+  set_fact: subdomain_item="-d {{ item }}.{{ domain }}"
+  with_items: "{{ subdomains }}"
+  register: subdomains_result
+  when: subdomains | length > 0
+
+- name: Gather subdomains for Let's Encrypt
+  set_fact: subdomain_list="{{ subdomains_result.results | map(attribute='ansible_facts.subdomain_item') | join(' ') }}"
+  when: subdomains | length > 0
+
 - name: Generate initial certificate
-  command: bash -c "systemctl stop nginx; letsencrypt certonly --standalone -d {{ domain }} {% if use_www %}-d www.{{ domain }}{% endif %} -m {{ letsencrypt_email }} --agree-tos; systemctl start nginx" creates=/etc/letsencrypt
+  command: bash -c "systemctl stop nginx; letsencrypt certonly --standalone -d {{ domain }} {% if use_www %}-d www.{{ domain }}{% endif %}{% if subdomain_list is defined %} {{ subdomain_list }}{% endif %} -m {{ letsencrypt_email }} --agree-tos; systemctl start nginx" creates=/etc/letsencrypt
   notify: restart nginx
   when: letsencrypt
 
