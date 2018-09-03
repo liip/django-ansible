@@ -1,5 +1,9 @@
+- name: "Check if nodejs-legacy is needed"
+  set_fact:
+      nodejs_legacy_pkg: ',nodejs-legacy'
+  when: ( ansible_distribution == 'Ubuntu' and ansible_distribution_version is version('16.04', '<=')) or (ansible_distribution == 'Debian' and ansible_distribution_version is version('9', '<='))
 - name: Install uwsgi and python and other dependencies
-  apt: pkg=uwsgi,uwsgi-plugin-python3,python3-dev,virtualenv,python-pip,libpq-dev,nodejs-legacy,npm,git,gettext,libjpeg-dev state=installed update_cache=true
+  apt: pkg=uwsgi,uwsgi-plugin-python3,python3-dev,virtualenv,python-pip,libpq-dev,nodejs {{ nodejs_legacy_pkg }},npm,git,gettext,libjpeg-dev state=installed update_cache=true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Update git repo
