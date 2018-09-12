@@ -1,5 +1,5 @@
 - name: Install PostgreSQL
-  apt: pkg=postgresql,python-psycopg2 state=installed update_cache=true
+  apt: pkg=postgresql,python3-psycopg2 state=installed update_cache=true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Create Database
