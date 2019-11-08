@@ -20,7 +20,7 @@ first==2.0.1              # via pip-tools
 gitric==0.4
 idna==2.6                 # via cryptography
 isort==4.2.15
-paramiko==2.3.1           # via fabric3
+paramiko==2.3.3           # via fabric3
 pip-tools==1.10.1
 pluggy==0.5.2             # via tox
 psycopg2==2.7.3.1
