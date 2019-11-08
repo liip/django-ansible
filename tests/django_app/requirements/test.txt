@@ -4,22 +4,18 @@
 #
 #    pip-compile --output-file test.txt test.in
 #
-
 apipkg==1.4               # via execnet
 click==6.7                # via rq
-configparser==3.5.0       # via flake8
 coverage==4.4.1           # via pytest-cov
 dj-database-url==0.4.2
 dj-email-url==0.0.10
 django-rq==0.9.6
-Django==1.11.6            # via django-rq
-enum34==1.1.6             # via flake8
+django==1.11.23
 execnet==1.5.0            # via pytest-xdist
-factory-boy==2.8.1
-Faker==0.8.6              # via factory-boy
+factory_boy==2.8.1
+faker==0.8.6              # via factory-boy
 flake8==3.4.1
 inflection==0.3.1         # via pytest-factoryboy
-ipaddress==1.0.18         # via faker
 mccabe==0.6.1             # via flake8
 psycopg2==2.7.3.1
 py==1.4.34                # via pytest
@@ -37,7 +33,3 @@ redis==2.10.6             # via rq
 rq==0.8.2                 # via django-rq
 six==1.11.0               # via faker, python-dateutil
 text-unidecode==1.0       # via faker
-
-# The following packages are commented out because they are
-# considered to be unsafe in a requirements file:
-# setuptools                # via pytest
