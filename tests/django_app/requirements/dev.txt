@@ -14,7 +14,7 @@ dj-email-url==0.0.10
 django-debug-toolbar==1.8
 django-extensions==1.9.6
 django-rq==0.9.6
-django==1.11.23
+django==1.11.28
 fabric3==1.13.1.post1
 first==2.0.1              # via pip-tools
 gitric==0.4

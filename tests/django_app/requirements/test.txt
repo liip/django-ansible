@@ -10,7 +10,7 @@ coverage==4.4.1           # via pytest-cov
 dj-database-url==0.4.2
 dj-email-url==0.0.10
 django-rq==0.9.6
-django==1.11.23
+django==1.11.28
 execnet==1.5.0            # via pytest-xdist
 factory_boy==2.8.1
 faker==0.8.6              # via factory-boy

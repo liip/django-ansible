@@ -8,7 +8,7 @@ click==6.7                # via rq
 dj-database-url==0.4.2
 dj-email-url==0.0.10
 django-rq==0.9.6
-django==1.11.23
+django==1.11.28
 psycopg2==2.7.3.1
 pytz==2017.2              # via django
 redis==2.10.6             # via rq
