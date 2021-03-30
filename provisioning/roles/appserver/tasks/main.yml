@@ -3,7 +3,7 @@
       nodejs_legacy_pkg: ',nodejs-legacy'
   when: ( ansible_distribution == 'Ubuntu' and ansible_distribution_version is version('16.04', '<=')) or (ansible_distribution == 'Debian' and ansible_distribution_version is version('9', '<='))
 - name: Install uwsgi and python and other dependencies
-  apt: pkg=uwsgi,uwsgi-plugin-python3,python3-dev,virtualenv,python-pip,libpq-dev,nodejs{{ nodejs_legacy_pkg }},npm,git,gettext,libjpeg-dev state=installed update_cache=true
+  apt: pkg=uwsgi,uwsgi-plugin-python3,python3-dev,virtualenv,python3-pip,libpq-dev,nodejs{{ nodejs_legacy_pkg }},npm,git,gettext,libjpeg-dev state=present update_cache=true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Update git repo
@@ -73,7 +73,7 @@
     - {setting: "MEDIA_URL", value: "{{ media_url }}"}
     - {setting: "STATIC_URL", value: "{{ static_url }}"}
     - {setting: "ALLOWED_HOSTS", value: "{{ full_domain }}{% if subdomain_list is defined %}{{subdomain_list}}{% endif %}"}
-    - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.config.settings.base"}
+    - {setting: "DJANGO_SETTINGS_MODULE", value: "{{ project_name }}.settings.base"}
     - {setting: "ERROR_LOG_FILE", value: "{{ root_dir }}/logs/error.log"}
     - {setting: "INFO_LOG_FILE", value: "{{ root_dir }}/logs/info.log"}
     - {setting: "URL_PROTOCOL_HOST", value: "http{% if ssl %}s{% endif %}://{{ full_domain }}"}

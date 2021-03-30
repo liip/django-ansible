@@ -1,5 +1,5 @@
 - name: Install nginx
-  apt: pkg=nginx,python-passlib state=installed update_cache=true
+  apt: pkg=nginx,python-passlib state=present update_cache=true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Copy nginx configuration file (non-ssl)

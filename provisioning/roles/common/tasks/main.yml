@@ -1,5 +1,5 @@
 - name: Install basic packages
-  apt: pkg=fail2ban,ufw state=installed update_cache=true
+  apt: pkg=fail2ban,ufw state=present update_cache=true
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: SSH - Disallow password authentication

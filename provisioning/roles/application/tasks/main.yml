@@ -1,5 +1,5 @@
 - name: Install git
-  apt: pkg=git state=installed update_cache=true
+  apt: pkg=git state=present update_cache=true
 
 - name: Update git repo
   git:
