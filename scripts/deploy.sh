@@ -12,4 +12,4 @@ else
     HOSTS=$1
 fi
 
-venv/bin/ansible-playbook -s site.yml -i $HOSTS --tags deploy
+venv/bin/ansible-playbook  -i $HOSTS --tags deploy site.yml

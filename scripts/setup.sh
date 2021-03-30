@@ -12,4 +12,4 @@ else
     HOSTS=$1
 fi
 
-venv/bin/ansible-playbook -s site.yml -i $HOSTS
+venv/bin/ansible-playbook -i $HOSTS site.yml 
