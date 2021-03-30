@@ -8,7 +8,7 @@
 
 - name: Reload systemd
   command: systemctl daemon-reload
-  when: daemon_reload|changed
+  when: daemon_reload
 
 - name: Start python-rq on boot
   service: name=python-rq enabled=yes
