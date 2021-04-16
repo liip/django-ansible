@@ -23,7 +23,7 @@ dj-database-url==0.4.2
     #   -r dev.in
 dj-email-url==0.0.10
     # via -r base.in
-django-debug-toolbar==1.8
+django-debug-toolbar==1.11.1
     # via -r dev.in
 django-extensions==1.9.6
     # via -r dev.in
