@@ -4,12 +4,25 @@
 #
 #    pip-compile --output-file base.txt base.in
 #
-click==6.7                # via rq
-dj-database-url==0.4.2    # via -r base.in
-dj-email-url==0.0.10      # via -r base.in
-django-rq==0.9.6          # via -r base.in
-django==1.11.29           # via -r base.in, django-rq
-psycopg2==2.7.3.1         # via -r base.in
-pytz==2017.2              # via django
-redis==2.10.6             # via rq
-rq==0.8.2                 # via django-rq
+click==6.7
+    # via rq
+dj-database-url==0.4.2
+    # via -r base.in
+dj-email-url==0.0.10
+    # via -r base.in
+django-rq==0.9.6
+    # via -r base.in
+django==2.2.24
+    # via
+    #   -r base.in
+    #   django-rq
+psycopg2==2.7.3.1
+    # via -r base.in
+pytz==2017.2
+    # via django
+redis==2.10.6
+    # via rq
+rq==0.8.2
+    # via django-rq
+sqlparse==0.4.1
+    # via django
